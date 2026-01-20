@@ -1,0 +1,10 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Category>
+
+<!-- portfolio filter (desktop) -->
+<ul class="portfolio-filter list-inline wow fadeInUp">
+	<li class="current list-inline-item" data-filter="*">Tümü</li>
+	@foreach(var item in Model)
+	{
+		<li class="list-inline-item" data-filter=".creative">@item.CategoryName</li>
+	}
+</ul>
