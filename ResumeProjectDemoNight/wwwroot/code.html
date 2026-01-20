@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer Portfolio Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#197fe6",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#181818",
+                        "sidebar-dark": "#121212",
+                        "card-dark": "#222222",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-item-active {
+            background-color: rgba(25, 127, 230, 0.1);
+            border-right: 3px solid #197fe6;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            color: #2dd4bf; /* Teal-colored outline icons */
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 flex min-h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-sidebar-dark border-r border-slate-800 flex flex-col fixed inset-y-0 left-0 z-50">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="color: white;">terminal</span>
+</div>
+<div>
+<h1 class="text-white text-lg font-bold leading-tight">Admin Panel</h1>
+<p class="text-slate-500 text-xs">Portfolio Manager</p>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1 custom-scrollbar">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-sm font-medium">About Me</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="text-sm font-medium">Experiences</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="text-sm font-medium">Education</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">code</span>
+<span class="text-sm font-medium">Skills</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white sidebar-item-active transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="text-sm font-semibold">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-sm font-medium">Certificates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">article</span>
+<span class="text-sm font-medium">Blog Posts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="text-sm font-medium">References</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="text-sm font-medium">Messages</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-colors" href="#">
+<span class="material-symbols-outlined" style="color: inherit;">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 flex flex-col h-screen">
+<!-- Top Navbar -->
+<header class="h-16 border-b border-slate-800 bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<h2 class="text-white text-lg font-bold leading-tight tracking-tight">Projects Overview</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<button class="relative p-2 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-background-dark"></span>
+</button>
+<div class="h-8 w-[1px] bg-slate-800 mx-2"></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-white text-sm font-bold">Admin</p>
+<p class="text-slate-500 text-xs">Super User</p>
+</div>
+<div class="size-10 rounded-full border-2 border-primary/30 p-0.5">
+<div class="h-full w-full rounded-full bg-center bg-no-repeat bg-cover" data-alt="Professional circular headshot of the developer admin" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDz1R20zzdB56bax-mXKj7NWDeL7y5UmDp8CFFNWBamT0uW1PVdsrke9WPxxVaxOArtdxi9tgKPJhh8KC17Lr_GGFn139PysBxkQRlXS_x7s8_2KS001Lb3rSdnnJxN1-yXWCMPXCZ4zULbDim5FEJyAjHYZ-p01a7kZeZff1Jw4cIc4hs5eKrPClgIZtGkmWIzqNDOJhVw3h6LDwdGOhVQ46JQMCK65PzBp3R194LFMszIjnrUkfJXufolbbj3ei95usj1DxX8xqY");'></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Area -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Welcome Section -->
+<div class="flex items-center justify-between">
+<div>
+<h3 class="text-2xl font-bold text-white">Featured Projects</h3>
+<p class="text-slate-400 text-sm mt-1">Manage and update your portfolio showcase entries.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white" style="color: white; font-size: 20px;">add</span>
+                        Add New Project
+                    </button>
+</div>
+<!-- Projects Table Card -->
+<div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-2xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-900/50">
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Project Name</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Category</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Technology</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">language</span>
+</div>
+<span class="text-white font-medium">Portfolio Website</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-slate-400 text-sm">Web</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] rounded uppercase font-bold">ASP.NET Core</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-teal-400"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm" style="color: inherit;">edit</span></button>
+<button class="p-1.5 text-slate-400 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-sm" style="color: inherit;">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">api</span>
+</div>
+<span class="text-white font-medium">Movie API</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-slate-400 text-sm">Backend</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] rounded uppercase font-bold">ASP.NET Core Web API</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-700/50 text-slate-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-slate-500"></span>
+                                            Completed
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm" style="color: inherit;">edit</span></button>
+<button class="p-1.5 text-slate-400 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-sm" style="color: inherit;">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<span class="text-white font-medium">AI Blog Platform</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-slate-400 text-sm">AI</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] rounded uppercase font-bold">OpenAI + .NET</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-teal-400"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm" style="color: inherit;">edit</span></button>
+<button class="p-1.5 text-slate-400 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-sm" style="color: inherit;">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-800 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">map</span>
+</div>
+<span class="text-white font-medium">Travel Guide App</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-slate-400 text-sm">Mobile</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] rounded uppercase font-bold">.NET MAUI</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-bold">
+<span class="size-1.5 rounded-full bg-orange-400"></span>
+                                            In Progress
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm" style="color: inherit;">edit</span></button>
+<button class="p-1.5 text-slate-400 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-sm" style="color: inherit;">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Footer -->
+<div class="px-6 py-4 bg-slate-900/30 flex items-center justify-between border-t border-slate-800">
+<span class="text-slate-500 text-xs font-medium uppercase tracking-wider">Showing 4 of 24 Projects</span>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded border border-slate-700 text-slate-400 hover:text-white transition-colors text-xs font-bold">Previous</button>
+<button class="px-3 py-1.5 rounded border border-slate-700 text-slate-400 hover:text-white transition-colors text-xs font-bold">Next</button>
+</div>
+</div>
+</div>
+<!-- FAB Example (Add Floating Action) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="group flex items-center justify-center size-14 bg-primary text-white rounded-full shadow-2xl hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" style="color: white; font-size: 28px;">add</span>
+<span class="absolute right-full mr-4 px-3 py-1.5 bg-slate-900 text-white text-xs font-bold rounded shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                            Create New Project
+                        </span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
