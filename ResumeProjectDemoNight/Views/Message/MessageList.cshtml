@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "MessageList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model List<ResumeProjectDemoNight.Entities.Message>
+
+<div class="bg-gray-900 rounded-lg p-6">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h2 class="text-2xl font-semibold text-white">Mesajlar</h2>
+            <p class="text-gray-400 text-sm mt-1">Gelen mesajlarınızı buradan yönetebilirsiniz.</p>
+        </div>
+        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
+            @Model.Count(m => !m.IsRead) Okunmadı
+        </span>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="border-b border-gray-700 text-gray-400 text-sm">
+                    <th class="text-left py-3 px-4">#</th>
+                    <th class="text-left py-3 px-4">Gönderen</th>
+                    <th class="text-left py-3 px-4">E-posta</th>
+                    <th class="text-left py-3 px-4">Konu</th>
+                    <th class="text-left py-3 px-4">Tarih</th>
+                    <th class="text-left py-3 px-4">Durum</th>
+                    <th class="text-center py-3 px-4">İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var message in Model)
+                {
+                    <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors @(!message.IsRead ? "bg-gray-850" : "")">
+                        <td class="py-4 px-4 text-gray-300">@message.MessageId</td>
+                        <td class="py-4 px-4">
+                            <span class="text-white @(!message.IsRead ? "font-semibold" : "")">
+                                @message.NameSurname
+                            </span>
+                        </td>
+                        <td class="py-4 px-4 text-gray-400 text-sm">@message.Email</td>
+                        <td class="py-4 px-4">
+                            <span class="text-gray-300 @(!message.IsRead ? "font-medium" : "")">
+                                @message.Subject
+                            </span>
+                        </td>
+                        <td class="py-4 px-4 text-gray-400 text-sm">
+                            @message.SendDate.ToString("dd.MM.yyyy HH:mm")
+                        </td>
+                        <td class="py-4 px-4">
+                            @if (message.IsRead)
+                            {
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-gray-700 text-gray-300">
+                                    Okundu
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-500 text-white">
+                                    Yeni
+                                </span>
+                            }
+                        </td>
+                        <td class="py-4 px-4">
+                            <div class="flex items-center justify-center gap-2">
+                                <a href="@Url.Action("Details", new { id = message.MessageId })"
+                                   class="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+                                   title="Görüntüle">
+                                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </a>
+                                <a href="@Url.Action("Delete", new { id = message.MessageId })"
+                                   onclick="return confirm('Bu mesajı silmek istediğinize emin misiniz?')"
+                                   class="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+                                   title="Sil">
+                                    <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4 text-center text-gray-500 text-sm">
+        TOPLAM @Model.Count MESAJ LİSTELENİYOR.
+    </div>
+</div>
+
+

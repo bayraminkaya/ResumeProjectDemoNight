@@ -1,0 +1,18 @@
+﻿@model ResumeProjectDemoNight.Entities.Portfolio
+@{
+    ViewData["Title"] = "UpdatePortfolio";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h1>Proje Güncelleme Sayfası</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="PortfolioId"/>
+    <label>Başlık</label>
+    <input type="text" asp-for="ProjectTitle" />
+    <br />
+    <label>Görsel URL</label>
+    <input type="text" asp-for="ImageUrl" />
+    <br />
+    <button>Projeyi Güncelle</button>
+</form>
