@@ -1,0 +1,78 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Skill>
+
+<div class="skills-wrapper">
+    @foreach (var item in Model.Take(6)) 
+    {
+        <div class="skill-item mb-4">
+            <div class="skill-info clearfix">
+                <h4 class="float-left mb-3 mt-0">@item.SkillName</h4>
+                <span class="float-right">@item.SkillDegree%</span>
+            </div>
+            <div class="progress" style="height: 7px;">
+                <div class="progress-bar" role="progressbar" style="width: @item.SkillDegree%; background-color: #@item.SkillColor;"></div>
+            </div>
+        </div>
+    }
+
+    <div class="mt-3 text-right">
+        <button type="button" class="btn btn-sm btn-outline-dark rounded-pill shadow-sm" data-toggle="modal" data-target="#allSkillsModal">
+            <i class="fas fa-layer-group mr-2"></i> Tüm Teknik Yetenekler
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="allSkillsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 15px;">
+            <div class="modal-header border-0 bg-light rounded-top p-4">
+                <h5 class="modal-title font-weight-bold" style="color: #353353;">
+                    <i class="fas fa-tools mr-2 text-primary"></i> Teknik Uzmanlık Yığınım
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-4" style="max-height: 70vh; overflow-y: auto;">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h6 class="font-weight-bold"><i class="fas fa-code mr-2 text-danger"></i> Programlama Dilleri</h6>
+                        <p class="small text-secondary mt-2">C#, SQL (T-SQL), JavaScript (ES6+), Python, Java, HTML5, CSS3 (Sass)</p>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <h6 class="font-weight-bold"><i class="fas fa-layer-group mr-2 text-primary"></i> Backend & Mimari</h6>
+                        <p class="small text-secondary mt-2">.NET Core/Framework, ASP.NET Core, MVC, Web API, EF Core, LINQ; Clean & N-Tier Architecture, SOLID, DI</p>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <h6 class="font-weight-bold"><i class="fas fa-shield-alt mr-2 text-success"></i> Güvenlik & Kimlik Doğrulama</h6>
+                        <p class="small text-secondary mt-2">Authentication/Authorization, JWT, ASP.NET Identity, OWASP Farkındalığı</p>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <h6 class="font-weight-bold"><i class="fas fa-laptop-code mr-2 text-info"></i> Frontend & UI</h6>
+                        <p class="small text-secondary mt-2">React.js, Redux, jQuery, Tailwind CSS, Bootstrap 5; Responsive & Modular UI</p>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <h6 class="font-weight-bold"><i class="fas fa-robot mr-2 text-warning"></i> Yapay Zeka & Otomasyon</h6>
+                        <p class="small text-secondary mt-2">API tabanlı AI/LLM entegrasyonları, Çok dilli otomasyon akışları, Prompt Engineering</p>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <h6 class="font-weight-bold"><i class="fas fa-cloud mr-2 text-secondary"></i> Bulut & DevOps</h6>
+                        <p class="small text-secondary mt-2">Cloudflare CDN & R2, Yüksek Trafik Dağıtımı, Azure DevOps, Docker, CI/CD, GitFlow</p>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <h6 class="font-weight-bold mt-3"><i class="fas fa-tasks mr-2 text-dark"></i> Mühendislik Pratikleri</h6>
+                        <p class="small text-secondary mt-2">Agile/Scrum,SDLC,Code Reviews,Unit Testing</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 bg-light rounded-bottom">
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>

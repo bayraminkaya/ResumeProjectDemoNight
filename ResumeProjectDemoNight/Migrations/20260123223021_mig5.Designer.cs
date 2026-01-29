@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResumeProjectDemoNight.Context;
 
@@ -11,9 +12,11 @@ using ResumeProjectDemoNight.Context;
 namespace ResumeProjectDemoNight.Migrations
 {
     [DbContext(typeof(ResumeContext))]
-    partial class ResumeContextModelSnapshot : ModelSnapshot
+    [Migration("20260123223021_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,34 +227,6 @@ namespace ResumeProjectDemoNight.Migrations
                     b.HasKey("SocialMediaId");
 
                     b.ToTable("SocialMedias");
-                });
-
-            modelBuilder.Entity("ResumeProjectDemoNight.Entities.Statistic", b =>
-                {
-                    b.Property<int>("StatisticId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatisticId"));
-
-                    b.Property<string>("IconUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Suffix")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("StatisticId");
-
-                    b.ToTable("Statistics");
                 });
 
             modelBuilder.Entity("ResumeProjectDemoNight.Entities.Testimonial", b =>

@@ -1,97 +1,73 @@
-﻿<section id="experience">
+﻿@model List<ResumeProjectDemoNight.Entities.Experience>
 
-	<div class="container">
+<section id="experience">
+    <div class="container">
 
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">Deneyimlerim</h2>
+        <h2 class="section-title wow fadeInUp">Eğitim & Deneyim</h2>
+        <div class="spacer" data-height="60"></div>
 
-		<div class="spacer" data-height="60"></div>
+        <div class="row mb-5 text-center">
+            <div class="col-md-4">
+                <div class="bg-white rounded shadow-dark p-3 wow zoomIn">
+                    <i class="fas fa-university text-primary mb-2" style="font-size: 20px;"></i>
+                    <h6 class="mb-1 small font-weight-bold">Trakya Üniversitesi</h6>
+                    <span class="text-muted" style="font-size: 12px;">Bilgisayar Mühendisliği</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bg-white rounded shadow-dark p-3 wow zoomIn" data-wow-delay="0.2s">
+                    <i class="fas fa-star text-warning mb-2" style="font-size: 20px;"></i>
+                    <h6 class="mb-1 small font-weight-bold">GPA: 3.20 / 4.00</h6>
+                    <span class="text-muted" style="font-size: 12px;">Lisans Mezuniyeti (B.Sc.)</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bg-white rounded shadow-dark p-3 wow zoomIn" data-wow-delay="0.4s">
+                    <i class="fas fa-calendar-alt text-danger mb-2" style="font-size: 20px;"></i>
+                    <h6 class="mb-1 small font-weight-bold">2018 - 2022</h6>
+                    <span class="text-muted" style="font-size: 12px;">Mezuniyet Dönemi</span>
+                </div>
+            </div>
+        </div>
 
-		<div class="row">
+        <div class="row">
+            
+            <div class="col-md-6">
+                <div class="timeline exp bg-white rounded shadow-dark padding-30 overflow-hidden">
+                    @foreach (var item in Model.Take(2))
+                    {
+                        <div class="timeline-container wow fadeInUp">
+                            <div class="content">
+                                <span class="time">@item.WorkPeriodDate</span>
+                                <h3 class="title">@item.Title</h3>
+                                <h6 class="text-primary mb-2" style="font-size: 13px;color: #FF4C60!important;">@item.CompanyName</h6>
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
+                    }
+                    <span class="line"></span>
+                </div>
+            </div>
 
-			<div class="col-md-6">
+            
+            <div class="col-md-6">
+                <div class="spacer d-md-none d-lg-none" data-height="30"></div>
+                <div class="timeline exp bg-white rounded shadow-dark padding-30 overflow-hidden">
+                    @foreach (var item in Model.Skip(2))
+                    {
+                        <div class="timeline-container wow fadeInUp">
+                            <div class="content">
+                                <span class="time">@item.WorkPeriodDate</span>
+                                <h3 class="title">@item.Title</h3>
+                                <h6 class="text-primary mb-2" style="font-size: 13px;color: #FF4C60!important;">@item.CompanyName</h6>
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
+                    }
+                    <span class="line"></span>
+                </div>
+            </div>
+        </div>
 
-				<!-- timeline wrapper -->
-				<div class="timeline edu bg-white rounded shadow-dark padding-30 overflow-hidden">
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp">
-						<div class="content">
-							<span class="time">2019 - Present</span>
-							<h3 class="title">Academic Degree</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
-						<div class="content">
-							<span class="time">2017 - 2013</span>
-							<h3 class="title">Bachelor’s Degree</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp" data-wow-delay="0.4s">
-						<div class="content">
-							<span class="time">2013 - 2009</span>
-							<h3 class="title">Honours Degree</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- main line -->
-					<span class="line"></span>
-
-				</div>
-
-			</div>
-
-			<div class="col-md-6">
-
-				<!-- responsive spacer -->
-				<div class="spacer d-md-none d-lg-none" data-height="30"></div>
-
-				<!-- timeline wrapper -->
-				<div class="timeline exp bg-white rounded shadow-dark padding-30 overflow-hidden">
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp">
-						<div class="content">
-							<span class="time">2019 - Present</span>
-							<h3 class="title">Web Designer</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
-						<div class="content">
-							<span class="time">2017 - 2013</span>
-							<h3 class="title">Front-End Developer</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp" data-wow-delay="0.4s">
-						<div class="content">
-							<span class="time">2013 - 2009</span>
-							<h3 class="title">Back-End Developer</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- main line -->
-					<span class="line"></span>
-
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-
+    </div>
 </section>

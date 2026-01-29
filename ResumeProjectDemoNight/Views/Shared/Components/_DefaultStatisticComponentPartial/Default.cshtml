@@ -1,0 +1,42 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Statistic>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        
+        string iconColor = "#353353"; 
+
+        switch (item.IconUrl)
+        {
+            case "fas fa-fire":
+                iconColor = "#ff4c60"; 
+                break;
+            case "fas fa-laptop-code":
+                iconColor = "#6c6ce5"; 
+                break;
+            case "fas fa-globe-americas":
+                iconColor = "#44d7b6"; 
+                break;
+            case "fas fa-award":
+                iconColor = "#ffb100"; 
+                break;
+        }
+
+        <div class="col-md-3 col-sm-6 text-center">
+            <div class="fact-item">
+               
+                <span class="icon @item.IconUrl" style="color: @iconColor; font-size: 34px; margin-bottom: 15px; display: inline-block;"></span>
+
+                <div class="details">
+                    <h3 class="mb-0 mt-0 number" style="font-weight: 700;">
+                        <em class="@(item.Value % 1 == 0 ? "count" : "")">
+                            @item.Value.ToString("G29").Replace(",", ".")
+                        </em>@item.Suffix
+                    </h3>
+                    <p class="mb-0 text-muted" style="font-size: 14px; font-weight: 500;">@item.Name</p>
+                </div>
+            </div>
+            <div class="spacer d-md-none d-lg-none" data-height="30"></div>
+        </div>
+    }
+</div>

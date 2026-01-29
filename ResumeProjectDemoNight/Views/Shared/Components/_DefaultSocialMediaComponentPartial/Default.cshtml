@@ -1,0 +1,11 @@
+﻿@model List<ResumeProjectDemoNight.Entities.SocialMedia>
+
+<ul class="social-icons light list-inline mb-0 mt-4">
+    @foreach(var item in Model)
+    {
+        <li class="list-inline-item">
+            <a href="@item.SocialMediaURL"><i class="@item.Image"></i></a>
+        </li>
+    }
+</ul>
+

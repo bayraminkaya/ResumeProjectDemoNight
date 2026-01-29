@@ -15,14 +15,7 @@
 				<h1 class="mb-2 mt-0">@item.NameSurname</h1>
 				<span>Ben <span class="text-rotating">@item.Slider</span></span>
 
-				<!-- social icons -->
-				<ul class="social-icons light list-inline mb-0 mt-4">
-					<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-					<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-					<li class="list-inline-item"><a href="#"><i class="fab fa-behance"></i></a></li>
-					<li class="list-inline-item"><a href="#"><i class="fab fa-dribbble"></i></a></li>
-					<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-				</ul>
+				@await Component.InvokeAsync("_DefaultSocialMediaComponentPartial")
 
 				<!-- buttons -->
 				<div class="mt-4">
