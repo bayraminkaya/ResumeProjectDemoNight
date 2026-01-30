@@ -1,47 +1,175 @@
 ﻿@model List<ResumeProjectDemoNight.Entities.Experience>
 
-<section id="experience">
-    <div class="container">
+<style>
 
+    .experience-section {
+        padding: 60px 0;
+    }
+
+    .timeline-container .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 320px; 
+        padding: 30px !important;
+        position: relative;
+        background: #fff;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+
+    .timeline-container .title {
+        min-height: 60px; 
+        display: flex;
+        align-items: center; 
+        margin-bottom: 5px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+
+    .company-name {
+        min-height: 20px;
+        margin-bottom: 15px !important;
+        font-size: 13px;
+        color: #FF4C60 !important;
+        font-weight: 600;
+        display: block;
+    }
+
+    .timeline-container:hover .content {
+        transform: translateY(-7px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+
+    .exp-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 4; 
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        color: #5E5C7F;
+        line-height: 1.6;
+        margin-bottom: 20px !important;
+        min-height: 90px; 
+    }
+
+    .btn-read-more {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #FF4C60;
+        letter-spacing: 1px;
+        display: inline-flex;
+        align-items: center;
+        background: rgba(255, 76, 96, 0.08);
+        padding: 6px 15px;
+        border-radius: 20px;
+        width: fit-content;
+        text-decoration: none !important;
+        transition: 0.3s;
+    }
+
+        .btn-read-more:hover {
+            background: #FF4C60;
+            color: #fff !important;
+        }
+
+    .modal-content-custom {
+        border-radius: 15px;
+        border: none;
+        overflow: hidden;
+    }
+
+    .modal-header-premium {
+        background: #353353;
+        padding: 35px 40px;
+        color: white;
+        text-align: left;
+        position: relative;
+    }
+
+    .close-modal-btn {
+        position: absolute;
+        right: 25px;
+        top: 25px;
+        color: rgba(255,255,255,0.7);
+        font-size: 28px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .modal-company-accent {
+        color: #FF4C60;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 13px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .modal-job-title {
+        font-weight: 800;
+        font-size: 28px;
+        margin-bottom: 5px;
+        color: white;
+    }
+
+    .modal-date {
+        color: rgba(255,255,255,0.6);
+        font-size: 14px;
+    }
+</style>
+
+<section id="experience" class="experience-section">
+    <div class="container">
         <h2 class="section-title wow fadeInUp">Eğitim & Deneyim</h2>
         <div class="spacer" data-height="60"></div>
 
-        <div class="row mb-5 text-center">
-            <div class="col-md-4">
-                <div class="bg-white rounded shadow-dark p-3 wow zoomIn">
-                    <i class="fas fa-university text-primary mb-2" style="font-size: 20px;"></i>
-                    <h6 class="mb-1 small font-weight-bold">Trakya Üniversitesi</h6>
-                    <span class="text-muted" style="font-size: 12px;">Bilgisayar Mühendisliği</span>
+        <div class="row mb-5">
+            <div class="col-md-4 mb-3">
+                <div class="bg-white rounded shadow-dark p-4 text-center h-100 wow zoomIn" style="border-top: 5px solid #6C6CE5;">
+                    <i class="fas fa-university mb-3" style="font-size: 26px; color: #6C6CE5;"></i>
+                    <h6 class="font-weight-bold mb-1">Trakya Üniversitesi</h6>
+                    <small class="text-muted d-block">Bilgisayar Mühendisliği</small>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="bg-white rounded shadow-dark p-3 wow zoomIn" data-wow-delay="0.2s">
-                    <i class="fas fa-star text-warning mb-2" style="font-size: 20px;"></i>
-                    <h6 class="mb-1 small font-weight-bold">GPA: 3.20 / 4.00</h6>
-                    <span class="text-muted" style="font-size: 12px;">Lisans Mezuniyeti (B.Sc.)</span>
+            <div class="col-md-4 mb-3">
+                <div class="bg-white rounded shadow-dark p-4 text-center h-100 wow zoomIn" data-wow-delay="0.2s" style="border-top: 5px solid #F9D74C;">
+                    <i class="fas fa-graduation-cap mb-3" style="font-size: 26px; color: #F9D74C;"></i>
+                    <h6 class="font-weight-bold mb-1">GPA: 3.20 / 4.00</h6>
+                    <small class="text-muted d-block">Lisans Mezuniyeti (B.Sc.)</small>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="bg-white rounded shadow-dark p-3 wow zoomIn" data-wow-delay="0.4s">
-                    <i class="fas fa-calendar-alt text-danger mb-2" style="font-size: 20px;"></i>
-                    <h6 class="mb-1 small font-weight-bold">2018 - 2022</h6>
-                    <span class="text-muted" style="font-size: 12px;">Mezuniyet Dönemi</span>
+            <div class="col-md-4 mb-3">
+                <div class="bg-white rounded shadow-dark p-4 text-center h-100 wow zoomIn" data-wow-delay="0.4s" style="border-top: 5px solid #FF4C60;">
+                    <i class="fas fa-award mb-3" style="font-size: 26px; color: #FF4C60;"></i>
+                    <h6 class="font-weight-bold mb-1">2018 - 2022</h6>
+                    <small class="text-muted d-block">Mezuniyet Dönemi</small>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            
             <div class="col-md-6">
                 <div class="timeline exp bg-white rounded shadow-dark padding-30 overflow-hidden">
                     @foreach (var item in Model.Take(2))
                     {
                         <div class="timeline-container wow fadeInUp">
                             <div class="content">
-                                <span class="time">@item.WorkPeriodDate</span>
-                                <h3 class="title">@item.Title</h3>
-                                <h6 class="text-primary mb-2" style="font-size: 13px;color: #FF4C60!important;">@item.CompanyName</h6>
-                                <p>@item.Description</p>
+                                <div>
+                                    <span class="time">@item.WorkPeriodDate</span>
+                                    <h3 class="title">@item.Title</h3>
+                                    <span class="company-name">@item.CompanyName</span>
+                                    <p class="exp-description">@item.Description</p>
+                                </div>
+                                <a href="javascript:void(0);" class="btn-read-more" data-toggle="modal" data-target="#expModal-@item.ExperienceId">
+                                    <i class="fas fa-search-plus mr-2"></i> Detayları Gör
+                                </a>
                             </div>
                         </div>
                     }
@@ -49,7 +177,6 @@
                 </div>
             </div>
 
-            
             <div class="col-md-6">
                 <div class="spacer d-md-none d-lg-none" data-height="30"></div>
                 <div class="timeline exp bg-white rounded shadow-dark padding-30 overflow-hidden">
@@ -57,10 +184,15 @@
                     {
                         <div class="timeline-container wow fadeInUp">
                             <div class="content">
-                                <span class="time">@item.WorkPeriodDate</span>
-                                <h3 class="title">@item.Title</h3>
-                                <h6 class="text-primary mb-2" style="font-size: 13px;color: #FF4C60!important;">@item.CompanyName</h6>
-                                <p>@item.Description</p>
+                                <div>
+                                    <span class="time">@item.WorkPeriodDate</span>
+                                    <h3 class="title">@item.Title</h3>
+                                    <span class="company-name">@item.CompanyName</span>
+                                    <p class="exp-description">@item.Description</p>
+                                </div>
+                                <a href="javascript:void(0);" class="btn-read-more" data-toggle="modal" data-target="#expModal-@item.ExperienceId">
+                                    <i class="fas fa-search-plus mr-2"></i> Detayları Gör
+                                </a>
                             </div>
                         </div>
                     }
@@ -68,6 +200,32 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
+
+@foreach (var item in Model)
+{
+    <div class="modal fade" id="expModal-@item.ExperienceId" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content modal-content-custom shadow-lg">
+                <div class="modal-header-premium">
+                    <button type="button" class="close-modal-btn" data-dismiss="modal">&times;</button>
+                    <span class="modal-company-accent">@item.CompanyName</span>
+                    <h2 class="modal-job-title">@item.Title</h2>
+                    <span class="modal-date"><i class="far fa-calendar-alt mr-2"></i>@item.WorkPeriodDate</span>
+                </div>
+                <div class="modal-body p-5">
+                    <h5 class="font-weight-bold mb-4 pb-2" style="color: #353353; border-bottom: 2px solid #f1f1f1;">
+                        Proje ve Sorumluluklar
+                    </h5>
+                    <p style="text-align: justify; line-height: 1.9; color: #5E5C7F; font-size: 15px;">
+                        @item.Description
+                    </p>
+                </div>
+                <div class="modal-footer border-0 bg-light p-3 justify-content-start">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Pencereyi Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,52 +1,103 @@
 ﻿@model List<ResumeProjectDemoNight.Entities.Portfolio>
 
 <section id="works">
+    <div class="container">
+        <h2 class="section-title wow fadeInUp">Projelerim</h2>
+        <div class="spacer" data-height="60"></div>
 
-	<div class="container">
+        @await Component.InvokeAsync("_DefaultCategoryComponentPartial")
 
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">Projelerim</h2>
+        <div class="row portfolio-wrapper">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6 grid-item cat-@item.CategoryId">
+                    <a href="javascript:void(0);" data-toggle="modal" data-target="#projectModal-@item.PortfolioId">
+                        <div class="portfolio-item rounded shadow-dark">
+                            <div class="details">
+                                <span class="term">@item.Category?.CategoryName</span>
+                                <h4 class="title">@item.ProjectTitle</h4>
+                                <span class="more-button"><i class="icon-magnifier-add"></i></span>
+                            </div>
+                            <div class="thumb">
+                                <img src="@item.ImageUrl" alt="@item.ProjectTitle" />
+                                <div class="mask"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
 
-		<div class="spacer" data-height="60"></div>
-
-		@await Component.InvokeAsync("_DefaultCategoryComponentPartial")
-
-
-		<!-- portolio wrapper -->
-		<div class="row portfolio-wrapper">
-
-			<!-- portfolio item -->
-
-			@foreach(var item in Model)
-			{
-				<div class="col-md-4 col-sm-6 grid-item art">
-					<a href="@item.ImageUrl" class="work-image">
-						<div class="portfolio-item rounded shadow-dark">
-							<div class="details">
-								<span class="term">Kategori</span>
-								<h4 class="title">@item.ProjectTitle</h4>
-								<span class="more-button"><i class="icon-magnifier-add"></i></span>
-							</div>
-							<div class="thumb">
-								<img src="@item.ImageUrl" alt="Portfolio-title" />
-								<div class="mask"></div>
-							</div>
-						</div>
-					</a>
-				</div>
-			}
-		</div>
-
-		<!-- more button -->
-		<div class="load-more text-center mt-4">
-			<a href="javascript:" class="btn btn-default"><i class="fas fa-spinner"></i> Load more</a>
-			<!-- numbered pagination (hidden for infinite scroll) -->
-			<ul class="portfolio-pagination list-inline d-none">
-				<li class="list-inline-item">1</li>
-				<li class="list-inline-item"><a href="works-2.html">2</a></li>
-			</ul>
-		</div>
-
-	</div>
-
+        <div class="load-more text-center mt-4">
+            <a href="javascript:void(0);" class="btn btn-default"><i class="fas fa-spinner mr-2"></i> Daha Fazla Gör</a>
+        </div>
+    </div>
 </section>
+
+@foreach (var item in Model)
+{
+    <div class="modal fade" id="projectModal-@item.PortfolioId" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content border-0">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" style="position:absolute; right:25px; top:20px; font-size: 30px; z-index: 10;">&times;</button>
+
+                    <div class="row">
+                        <!-- Sol Taraf - Ana Görsel -->
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <div class="modal-image-container">
+                                <img src="@item.ImageUrl" class="project-modal-img" alt="@item.ProjectTitle">
+                            </div>
+                        </div>
+
+                        <!-- Sağ Taraf - Proje Detayları -->
+                        <div class="col-md-6">
+                            <span class="text-muted small uppercase">@item.Category?.CategoryName</span>
+                            <h3 class="font-weight-bold mb-3" style="color: #353353;">@item.ProjectTitle</h3>
+
+                            <!-- Teknoloji Rozetleri -->
+                            <div class="mb-3">
+                                @if (!string.IsNullOrEmpty(item.TechStack))
+                                {
+                                    foreach (var tech in item.TechStack.Split(','))
+                                    {
+                                        <span class="tech-badge">@tech.Trim()</span>
+                                    }
+                                }
+                            </div>
+
+                            <!-- Açıklama -->
+                            <p class="text-muted mb-4" style="text-align: justify; line-height: 1.7; font-size: 14px;">
+                                @item.Description
+                            </p>
+
+                            <!-- Proje Görselleri (Galeri) -->
+                            @if (!string.IsNullOrEmpty(item.OtherImages))
+                            {
+                                var imageList = item.OtherImages.Split(',').Select(img => img.Trim()).ToList();
+
+                                <span class="gallery-label"><i class="fas fa-images mr-2"></i>Proje Görselleri</span>
+                                <div class="attachment-container" data-gallery-id="gallery-@item.PortfolioId">
+                                    @foreach (var img in imageList)
+                                    {
+                                        <img src="@img" class="attachment-item" alt="Proje Görseli">
+                                    }
+                                </div>
+                            }
+
+                            <!-- GitHub Linki -->
+                            @if (!string.IsNullOrEmpty(item.GithubUrl))
+                            {
+                                <div class="mt-4">
+                                    <a href="@item.GithubUrl" target="_blank" class="btn btn-default btn-sm">
+                                        <i class="fab fa-github mr-2"></i> GitHub'da İncele
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
