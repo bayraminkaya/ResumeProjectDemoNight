@@ -1,0 +1,168 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Skill>
+@{
+    ViewData["Title"] = "Yeteneklerim";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="min-h-screen p-6 lg:p-8">
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Header Section -->
+        <div class="relative mb-10">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/30">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-white">Yeteneklerim</h1>
+                            <p class="text-gray-400 mt-1">Teknik becerilerinizi yönetin</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/Skill/CreateSkill/"
+                   class="group relative inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-xl hover:shadow-cyan-500/40 hover:-translate-y-0.5 overflow-hidden">
+                    <span class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 relative z-10" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="relative z-10">Yeni Yetenek Ekle</span>
+                </a>
+            </div>
+
+            <!-- Decorative Elements -->
+            <div class="absolute -top-4 -right-4 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-teal-500/10 rounded-full blur-2xl"></div>
+        </div>
+
+        <!-- Success/Error Messages -->
+        @if (TempData["Success"] != null)
+        {
+            <div class="mb-6 bg-green-500/10 border border-green-500/50 rounded-xl p-4 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-green-400">@TempData["Success"]</span>
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="mb-6 bg-red-500/10 border border-red-500/50 rounded-xl p-4 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-red-400">@TempData["Error"]</span>
+            </div>
+        }
+
+        <!-- Skills Grid -->
+        @if (Model.Any())
+        {
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                @foreach (var item in Model)
+                {
+                    <div class="group relative bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-gray-600/50 transition-all duration-300 hover:shadow-xl hover:shadow-black/20">
+
+                        <!-- Skill Header -->
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-4">
+                                <!-- Color Indicator -->
+                                <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
+                                     style="background: linear-gradient(135deg, #@(item.SkillColor)40, #@(item.SkillColor)20); border: 1px solid #@(item.SkillColor)50;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="color: #@item.SkillColor;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">@item.SkillName</h3>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <span class="text-2xl font-bold" style="color: #@item.SkillColor;">@item.SkillDegree%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <a href="/Skill/UpdateSkill/@item.SkillId"
+                                   class="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 flex items-center justify-center transition-all"
+                                   title="Düzenle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                    </svg>
+                                </a>
+                                <a href="/Skill/DeleteSkill/@item.SkillId"
+                                   class="w-9 h-9 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 flex items-center justify-center transition-all"
+                                   title="Sil"
+                                   onclick="return confirm('Bu yeteneği silmek istediğinizden emin misiniz?')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="relative">
+                            <div class="h-3 bg-gray-700/50 rounded-full overflow-hidden">
+                                <div class="h-full rounded-full transition-all duration-500 ease-out relative overflow-hidden"
+                                     style="width: @(item.SkillDegree)%; background: linear-gradient(90deg, #@(item.SkillColor), #@(item.SkillColor)CC);">
+                                    <!-- Shimmer Effect -->
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                </div>
+                            </div>
+                            <!-- Progress Markers -->
+                            <div class="flex justify-between mt-2">
+                                <span class="text-xs text-gray-500">0%</span>
+                                <span class="text-xs text-gray-500">50%</span>
+                                <span class="text-xs text-gray-500">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+        <!-- Empty State -->
+        @if (!Model.Any())
+        {
+            <div class="relative bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 border-dashed rounded-2xl p-12 text-center">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-teal-500/5 rounded-2xl"></div>
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Henüz yetenek eklenmemiş</h3>
+                    <p class="text-gray-400 mb-8 max-w-md mx-auto">Teknik becerilerinizi ekleyerek portföyünüzü zenginleştirin.</p>
+                    <a href="/Skill/CreateSkill/" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold px-8 py-3.5 rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                        İlk Yeteneği Ekle
+                    </a>
+                </div>
+            </div>
+        }
+
+        <!-- Footer Stats -->
+        @if (Model.Any())
+        {
+            <div class="mt-8 flex items-center justify-center">
+                <div class="inline-flex items-center gap-4 px-6 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-gray-700/50">
+                    <span class="text-gray-300 text-sm font-medium">
+                        <span class="text-cyan-400">@Model.Count</span> yetenek
+                    </span>
+                    <div class="w-px h-4 bg-gray-700"></div>
+                    <span class="text-gray-300 text-sm font-medium">
+                        Ortalama: <span class="text-teal-400">%@(Model.Any() ? Math.Round(Model.Average(x => x.SkillDegree)) : 0)</span>
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+</div>

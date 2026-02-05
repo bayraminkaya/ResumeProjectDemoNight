@@ -13,14 +13,12 @@ namespace ResumeProjectDemoNight.Controllers
             _context = context;
         }
 
-        // GET
         public IActionResult AboutList()
         {
             var about = _context.Abouts.FirstOrDefault();
             return View(about ?? new About());
         }
 
-        // POST - Kaydet veya Güncelle
         [HttpPost]
         public IActionResult AboutList(About model)
         {
@@ -30,7 +28,6 @@ namespace ResumeProjectDemoNight.Controllers
 
                 if (existingAbout != null)
                 {
-                    // Güncelle
                     existingAbout.NameSurname = model.NameSurname;
                     existingAbout.ImageUrl = model.ImageUrl;
                     existingAbout.Description = model.Description;
@@ -40,13 +37,12 @@ namespace ResumeProjectDemoNight.Controllers
                 }
                 else
                 {
-                    // Yeni kaydet
                     _context.Abouts.Add(model);
                     _context.SaveChanges();
                     TempData["Success"] = "Bilgileriniz başarıyla kaydedildi!";
                 }
 
-                return RedirectToAction("AboutList"); // Burası düzeltildi
+                return RedirectToAction("AboutList");
             }
 
             TempData["Error"] = "Lütfen tüm alanları doğru şekilde doldurun.";
