@@ -1,96 +1,273 @@
-﻿@{
-    ViewData["Title"] = "MessageList";
+﻿@model List<ResumeProjectDemoNight.Entities.Message>
+@{
+    ViewData["Title"] = "Mesajlar";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+
+    var unreadCount = Model.Count(m => !m.IsRead);
+    var todayCount = Model.Count(m => m.SendDate.Date == DateTime.Today);
 }
 
-@model List<ResumeProjectDemoNight.Entities.Message>
+<div class="min-h-screen p-6 lg:p-8">
+    <div class="max-w-7xl mx-auto">
 
-<div class="bg-gray-900 rounded-lg p-6">
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h2 class="text-2xl font-semibold text-white">Mesajlar</h2>
-            <p class="text-gray-400 text-sm mt-1">Gelen mesajlarınızı buradan yönetebilirsiniz.</p>
-        </div>
-        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-            @Model.Count(m => !m.IsRead) Okunmadı
-        </span>
-    </div>
+        <!-- Header Section -->
+        <div class="relative mb-10">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-white">Mesajlar</h1>
+                            <p class="text-gray-400 mt-1">Gelen mesajlarınızı yönetin</p>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full">
-            <thead>
-                <tr class="border-b border-gray-700 text-gray-400 text-sm">
-                    <th class="text-left py-3 px-4">#</th>
-                    <th class="text-left py-3 px-4">Gönderen</th>
-                    <th class="text-left py-3 px-4">E-posta</th>
-                    <th class="text-left py-3 px-4">Konu</th>
-                    <th class="text-left py-3 px-4">Tarih</th>
-                    <th class="text-left py-3 px-4">Durum</th>
-                    <th class="text-center py-3 px-4">İşlem</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var message in Model)
+                <!-- Unread Badge -->
+                @if (unreadCount > 0)
                 {
-                    <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors @(!message.IsRead ? "bg-gray-850" : "")">
-                        <td class="py-4 px-4 text-gray-300">@message.MessageId</td>
-                        <td class="py-4 px-4">
-                            <span class="text-white @(!message.IsRead ? "font-semibold" : "")">
-                                @message.NameSurname
-                            </span>
-                        </td>
-                        <td class="py-4 px-4 text-gray-400 text-sm">@message.Email</td>
-                        <td class="py-4 px-4">
-                            <span class="text-gray-300 @(!message.IsRead ? "font-medium" : "")">
-                                @message.Subject
-                            </span>
-                        </td>
-                        <td class="py-4 px-4 text-gray-400 text-sm">
-                            @message.SendDate.ToString("dd.MM.yyyy HH:mm")
-                        </td>
-                        <td class="py-4 px-4">
-                            @if (message.IsRead)
-                            {
-                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-gray-700 text-gray-300">
-                                    Okundu
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-500 text-white">
-                                    Yeni
-                                </span>
-                            }
-                        </td>
-                        <td class="py-4 px-4">
-                            <div class="flex items-center justify-center gap-2">
-                                <a href="@Url.Action("Details", new { id = message.MessageId })"
-                                   class="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-                                   title="Görüntüle">
-                                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                </a>
-                                <a href="@Url.Action("Delete", new { id = message.MessageId })"
-                                   onclick="return confirm('Bu mesajı silmek istediğinize emin misiniz?')"
-                                   class="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-                                   title="Sil">
-                                    <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    <div class="inline-flex items-center gap-2 bg-indigo-500/20 border border-indigo-500/50 text-indigo-400 font-semibold px-4 py-2 rounded-xl">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                        </span>
+                        @unreadCount Okunmamış Mesaj
+                    </div>
                 }
-            </tbody>
-        </table>
-    </div>
+            </div>
 
-    <div class="mt-4 text-center text-gray-500 text-sm">
-        TOPLAM @Model.Count MESAJ LİSTELENİYOR.
+            <div class="absolute -top-4 -right-4 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl"></div>
+        </div>
+
+        <!-- Stats Cards -->
+        @if (Model.Any())
+        {
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-xs">Toplam</p>
+                            <p class="text-xl font-bold text-white">@Model.Count</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 2a2 2 0 00-2 2v14l3.5-2 3.5 2 3.5-2 3.5 2V4a2 2 0 00-2-2H5zm2.5 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6.207.293a1 1 0 00-1.414 0l-6 6a1 1 0 101.414 1.414l6-6a1 1 0 000-1.414zM12.5 10a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-xs">Okunmamış</p>
+                            <p class="text-xl font-bold text-blue-400">@unreadCount</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-xs">Okunmuş</p>
+                            <p class="text-xl font-bold text-emerald-400">@Model.Count(m => m.IsRead)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-xs">Bugün</p>
+                            <p class="text-xl font-bold text-amber-400">@todayCount</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Success/Error Messages -->
+        @if (TempData["Success"] != null)
+        {
+            <div class="mb-6 bg-green-500/10 border border-green-500/50 rounded-xl p-4 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-green-400">@TempData["Success"]</span>
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="mb-6 bg-red-500/10 border border-red-500/50 rounded-xl p-4 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-red-400">@TempData["Error"]</span>
+            </div>
+        }
+
+        <!-- Messages List -->
+        @if (Model.Any())
+        {
+            <div class="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden">
+                <div class="divide-y divide-gray-700/50">
+                    @foreach (var item in Model)
+                    {
+                        <div class="group relative hover:bg-gray-700/30 transition-all duration-300 @(!item.IsRead ? "bg-indigo-500/5 border-l-4 border-l-indigo-500" : "border-l-4 border-l-transparent")">
+                            <div class="p-5">
+                                <div class="flex items-start gap-4">
+
+                                    <!-- Avatar -->
+                                    <div class="flex-shrink-0">
+                                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
+                                            @item.NameSurname.Substring(0, 1).ToUpper()
+                                        </div>
+                                    </div>
+
+                                    <!-- Content -->
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-start justify-between gap-4">
+                                            <div class="flex-1 min-w-0">
+                                                <!-- Name & Subject -->
+                                                <div class="flex items-center gap-2 mb-1">
+                                                    <h4 class="text-white font-semibold truncate @(!item.IsRead ? "text-white" : "text-gray-300")">
+                                                        @item.NameSurname
+                                                    </h4>
+                                                    @if (!item.IsRead)
+                                                    {
+                                                        <span class="px-2 py-0.5 bg-indigo-500 text-white text-xs font-semibold rounded-full">
+                                                            Yeni
+                                                        </span>
+                                                    }
+                                                </div>
+
+                                                <!-- Subject -->
+                                                <p class="text-sm font-medium @(!item.IsRead ? "text-indigo-400" : "text-gray-400") truncate">
+                                                    @item.Subject
+                                                </p>
+
+                                                <!-- Message Preview -->
+                                                <p class="text-gray-500 text-sm mt-1 line-clamp-1">
+                                                    @item.MessageDetail
+                                                </p>
+
+                                                <!-- Meta Info -->
+                                                <div class="flex items-center gap-4 mt-2">
+                                                    <span class="text-gray-500 text-xs flex items-center gap-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                                        </svg>
+                                                        @item.Email
+                                                    </span>
+                                                    <span class="text-gray-500 text-xs flex items-center gap-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        @item.SendDate.ToString("dd MMM yyyy, HH:mm")
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Actions -->
+                                            <div class="flex items-center gap-2 flex-shrink-0">
+                                                <a href="/Message/MessageDetails/@item.MessageId"
+                                                   class="w-9 h-9 rounded-lg bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 flex items-center justify-center transition-all"
+                                                   title="Görüntüle">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+                                                <a href="/Message/ToggleRead/@item.MessageId"
+                                                   class="w-9 h-9 rounded-lg bg-gray-700/50 text-gray-400 hover:bg-gray-600/50 flex items-center justify-center transition-all"
+                                                   title="@(item.IsRead ? "Okunmadı İşaretle" : "Okundu İşaretle")">
+                                                    @if (item.IsRead)
+                                                    {
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M2.94 6.412A2 2 0 002 8.108V16a2 2 0 002 2h12a2 2 0 002-2V8.108a2 2 0 00-.94-1.696l-6-3.75a2 2 0 00-2.12 0l-6 3.75zm2.615 2.423a1 1 0 10-1.11 1.664l5 3.333a1 1 0 001.11 0l5-3.333a1 1 0 00-1.11-1.664L10 11.798 5.555 8.835z" clip-rule="evenodd" />
+                                                        </svg>
+                                                    }
+                                                    else
+                                                    {
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                                        </svg>
+                                                    }
+                                                </a>
+                                                <a href="/Message/DeleteMessage/@item.MessageId"
+                                                   class="w-9 h-9 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 flex items-center justify-center transition-all"
+                                                   title="Sil"
+                                                   onclick="return confirm('Bu mesajı silmek istediğinizden emin misiniz?')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        <!-- Empty State -->
+        @if (!Model.Any())
+        {
+            <div class="relative bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 border-dashed rounded-2xl p-12 text-center">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-2xl"></div>
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Henüz mesaj yok</h3>
+                    <p class="text-gray-400 max-w-md mx-auto">Ziyaretçilerinizden gelen mesajlar burada görünecek.</p>
+                </div>
+            </div>
+        }
+
+        <!-- Footer Stats -->
+        @if (Model.Any())
+        {
+            <div class="mt-8 flex items-center justify-center">
+                <div class="inline-flex items-center gap-4 px-6 py-3 bg-gray-800/40 backdrop-blur-sm rounded-full border border-gray-700/50">
+                    <div class="flex items-center gap-2">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                        </span>
+                        <span class="text-gray-400 text-sm">Gelen Kutusu</span>
+                    </div>
+                    <div class="w-px h-4 bg-gray-700"></div>
+                    <span class="text-gray-300 text-sm font-medium">
+                        <span class="text-indigo-400">@Model.Count</span> mesaj
+                    </span>
+                </div>
+            </div>
+        }
     </div>
 </div>
-
-

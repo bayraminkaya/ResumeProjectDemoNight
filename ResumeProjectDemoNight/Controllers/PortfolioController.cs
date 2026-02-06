@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using ResumeProjectDemoNight.Context;
 using ResumeProjectDemoNight.Entities;
 
@@ -29,17 +28,28 @@ namespace ResumeProjectDemoNight.Controllers
         [HttpPost]
         public IActionResult CreatePortfolio(Portfolio portfolio)
         {
+            
+            portfolio.Description ??= "";
+            portfolio.TechStack ??= "";
+            portfolio.GithubUrl ??= "";
+            portfolio.OtherImages ??= "";
             portfolio.Status = true;
+
             _context.Portfolios.Add(portfolio);
             _context.SaveChanges();
+            TempData["Success"] = "Proje başarıyla eklendi!";
             return RedirectToAction("PortfolioList");
         }
 
         public IActionResult DeletePortfolio(int id)
         {
             var value = _context.Portfolios.Find(id);
-            _context.Portfolios.Remove(value);
-            _context.SaveChanges();
+            if (value != null)
+            {
+                _context.Portfolios.Remove(value);
+                _context.SaveChanges();
+                TempData["Success"] = "Proje başarıyla silindi!";
+            }
             return RedirectToAction("PortfolioList");
         }
 
@@ -47,14 +57,26 @@ namespace ResumeProjectDemoNight.Controllers
         public IActionResult UpdatePortfolio(int id)
         {
             var value = _context.Portfolios.Find(id);
+            if (value == null)
+            {
+                TempData["Error"] = "Proje bulunamadı!";
+                return RedirectToAction("PortfolioList");
+            }
             return View(value);
         }
 
         [HttpPost]
         public IActionResult UpdatePortfolio(Portfolio portfolio)
         {
+            
+            portfolio.Description ??= "";
+            portfolio.TechStack ??= "";
+            portfolio.GithubUrl ??= "";
+            portfolio.OtherImages ??= "";
+
             _context.Portfolios.Update(portfolio);
             _context.SaveChanges();
+            TempData["Success"] = "Proje başarıyla güncellendi!";
             return RedirectToAction("PortfolioList");
         }
     }
