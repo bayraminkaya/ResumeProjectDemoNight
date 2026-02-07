@@ -1,23 +1,149 @@
-﻿<header class="h-16 border-b border-slate-800 bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-40">
+﻿@{
+    var totalProjects = ViewBag.TotalProjects ?? 0;
+    var unreadCount = ViewBag.UnreadMessageCount ?? 0;
+    var unreadMessages = ViewBag.UnreadMessages as List<ResumeProjectDemoNight.Entities.Message> ?? new List<ResumeProjectDemoNight.Entities.Message>();
+}
+
+<header class="h-16 border-b border-slate-800 bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-40">
+    <!-- Left Side - Page Title -->
     <div class="flex items-center gap-4">
-        <h2 class="text-white text-lg font-bold leading-tight tracking-tight">Projects Overview</h2>
+        <h2 class="text-white text-lg font-bold leading-tight tracking-tight">Admin Panel</h2>
     </div>
-    <div class="flex items-center gap-6">
-        <div class="flex items-center gap-3">
-            <button class="relative p-2 text-slate-400 hover:text-white transition-colors">
-                <span class="material-symbols-outlined">notifications</span>
-                <span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-background-dark"></span>
+
+    <!-- Right Side - Notifications & Profile -->
+    <div class="flex items-center gap-4">
+
+        <!-- Projects Notification -->
+        <a href="/Portfolio/PortfolioList/" class="relative group flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-800/50 hover:bg-cyan-500/10 border border-gray-700/50 hover:border-cyan-500/30 transition-all">
+            <span class="material-symbols-outlined text-cyan-400">folder_special</span>
+            <span class="text-gray-300 text-sm font-medium hidden sm:inline">Projeler</span>
+            <span class="flex items-center justify-center min-w-[20px] h-5 px-1.5 bg-cyan-500 text-white text-xs font-bold rounded-full">
+                @totalProjects
+            </span>
+        </a>
+
+        <!-- Messages Notification (Dropdown) -->
+        <div class="relative" x-data="{ open: false }">
+            <button @@click="open = !open"
+                    @@click.away="open = false"
+                    class="relative flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-800/50 hover:bg-violet-500/10 border border-gray-700/50 hover:border-violet-500/30 transition-all">
+                <span class="material-symbols-outlined text-violet-400">mail</span>
+                <span class="text-gray-300 text-sm font-medium hidden sm:inline">Mesajlar</span>
+                @if (unreadCount > 0)
+                {
+                    <span class="flex items-center justify-center min-w-[20px] h-5 px-1.5 bg-red-500 text-white text-xs font-bold rounded-full animate-pulse">
+                        @unreadCount
+                    </span>
+                }
+                else
+                {
+                    <span class="flex items-center justify-center min-w-[20px] h-5 px-1.5 bg-gray-600 text-gray-300 text-xs font-medium rounded-full">
+                        0
+                    </span>
+                }
             </button>
-            <div class="h-8 w-[1px] bg-slate-800 mx-2"></div>
-        </div>
-        <div class="flex items-center gap-3">
-            <div class="text-right">
-                <p class="text-white text-sm font-bold">Admin</p>
-                <p class="text-slate-500 text-xs">Super User</p>
+
+            <!-- Dropdown Menu -->
+            <div x-show="open"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 translate-y-2"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 translate-y-2"
+                 class="absolute right-0 mt-2 w-80 bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50">
+
+                <!-- Dropdown Header -->
+                <div class="px-4 py-3 bg-gray-800/80 border-b border-gray-700/50 flex items-center justify-between">
+                    <span class="text-white font-semibold text-sm">Okunmamış Mesajlar</span>
+                    @if (unreadCount > 0)
+                    {
+                        <span class="px-2 py-0.5 bg-red-500/20 text-red-400 text-xs font-medium rounded-full">@unreadCount yeni</span>
+                    }
+                </div>
+
+                <!-- Messages List -->
+                <div class="max-h-80 overflow-y-auto">
+                    @if (unreadMessages.Any())
+                    {
+                        foreach (var message in unreadMessages)
+                        {
+                            <a href="/Message/MessageDetails/@message.MessageId"
+                               class="flex items-start gap-3 px-4 py-3 hover:bg-gray-700/50 transition-colors border-b border-gray-700/30 last:border-0">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-sm font-semibold">@message.NameSurname?.Substring(0, 1).ToUpper()</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <span class="font-medium text-white text-sm truncate">@message.NameSurname</span>
+                                        <span class="text-gray-500 text-xs flex-shrink-0">@message.SendDate.ToString("dd MMM")</span>
+                                    </div>
+                                    <p class="text-gray-400 text-xs truncate mt-0.5">@message.Subject</p>
+                                    <p class="text-gray-500 text-xs truncate mt-0.5">@message.MessageDetail?.Substring(0, Math.Min(50, message.MessageDetail?.Length ?? 0))...</p>
+                                </div>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <div class="px-4 py-8 text-center">
+                            <span class="material-symbols-outlined text-4xl text-gray-600 mb-2">mark_email_read</span>
+                            <p class="text-gray-500 text-sm">Okunmamış mesaj yok</p>
+                        </div>
+                    }
+                </div>
+
+                <!-- Dropdown Footer -->
+                <div class="px-4 py-3 bg-gray-800/80 border-t border-gray-700/50">
+                    <a href="/Message/MessageList/" class="flex items-center justify-center gap-2 w-full py-2 bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 text-sm font-medium rounded-lg transition-colors">
+                        <span class="material-symbols-outlined text-lg">inbox</span>
+                        Tüm Mesajları Gör
+                    </a>
+                </div>
             </div>
-            <div class="size-10 rounded-full border-2 border-primary/30 p-0.5">
-                <div class="h-full w-full rounded-full bg-center bg-no-repeat bg-cover" data-alt="Professional circular headshot of the developer admin" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDz1R20zzdB56bax-mXKj7NWDeL7y5UmDp8CFFNWBamT0uW1PVdsrke9WPxxVaxOArtdxi9tgKPJhh8KC17Lr_GGFn139PysBxkQRlXS_x7s8_2KS001Lb3rSdnnJxN1-yXWCMPXCZ4zULbDim5FEJyAjHYZ-p01a7kZeZff1Jw4cIc4hs5eKrPClgIZtGkmWIzqNDOJhVw3h6LDwdGOhVQ46JQMCK65PzBp3R194LFMszIjnrUkfJXufolbbj3ei95usj1DxX8xqY");'></div>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-8 w-px bg-gray-700"></div>
+
+        <!-- User Profile -->
+        <div class="flex items-center gap-3">
+            <div class="text-right hidden sm:block">
+                <p class="text-white text-sm font-bold">@Context.Session.GetString("AdminFullName")</p>
+                <p class="text-slate-500 text-xs">@Context.Session.GetString("AdminUsername")</p>
+            </div>
+            <div class="relative" x-data="{ open: false }">
+                <button @@click="open = !open" class="w-10 h-10 rounded-full border-2 border-cyan-500/30 p-0.5 overflow-hidden hover:border-cyan-500/50 transition-colors">
+                    @if (!string.IsNullOrEmpty(Context.Session.GetString("AdminProfileImage")))
+                    {
+                        <img src="@Context.Session.GetString("AdminProfileImage")" alt="Profile" class="w-full h-full rounded-full object-cover">
+                    }
+                    else
+                    {
+                        <div class="h-full w-full rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                            <span class="text-white text-sm font-bold">@Context.Session.GetString("AdminFullName")?.Substring(0, 1).ToUpper()</span>
+                        </div>
+                    }
+                </button>
+
+                <!-- Dropdown -->
+                <div x-show="open"
+                     @@click.away="open = false"
+                     x-transition
+                     class="absolute right-0 mt-2 w-48 bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden z-50">
+                    <div class="px-4 py-3 border-b border-gray-700">
+                        <p class="text-white text-sm font-medium">@Context.Session.GetString("AdminFullName")</p>
+                        <p class="text-gray-500 text-xs">@Context.Session.GetString("AdminUsername")</p>
+                    </div>
+                    <a href="/Auth/Logout" class="flex items-center gap-2 px-4 py-3 text-red-400 hover:bg-red-500/10 transition-colors">
+                        <span class="material-symbols-outlined text-lg">logout</span>
+                        <span class="text-sm">Çıkış Yap</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </header>
+
+<!-- Alpine.js (Dropdown için) - Head'e ekle veya burada include et -->
+<script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>

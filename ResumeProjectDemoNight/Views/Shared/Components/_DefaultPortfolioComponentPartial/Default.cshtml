@@ -1,5 +1,26 @@
 ﻿@model List<ResumeProjectDemoNight.Entities.Portfolio>
 
+@functions {
+    public string ConvertUrlsToLinks(string text)
+    {
+        if (string.IsNullOrEmpty(text)) return "";
+
+        // Satır atlamalarını <br> ile değiştir
+        text = text.Replace("\r\n", "<br>").Replace("\n", "<br>");
+
+        // URL pattern
+        var urlPattern = @"((https?:\/\/|www\.)[^\s<]+[^\s<.,;:!?\""'\)\]])";
+        var regex = new System.Text.RegularExpressions.Regex(urlPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        return regex.Replace(text, match =>
+        {
+            var url = match.Value;
+            var href = url.StartsWith("www.") ? "https://" + url : url;
+            return $"<a href=\"{href}\" target=\"_blank\" class=\"text-primary\" style=\"color: #6C6CE5 !important; text-decoration: underline;\">{url}</a>";
+        });
+    }
+}
+
 <section id="works">
     <div class="container">
         <h2 class="section-title wow fadeInUp">Projelerim</h2>
@@ -8,9 +29,12 @@
         @await Component.InvokeAsync("_DefaultCategoryComponentPartial")
 
         <div class="row portfolio-wrapper">
+            @{
+                var index = 0;
+            }
             @foreach (var item in Model)
             {
-                <div class="col-md-4 col-sm-6 grid-item cat-@item.CategoryId">
+                <div class="col-md-4 col-sm-6 grid-item cat-@item.CategoryId" data-index="@index" style="@(index >= 6 ? "display: none;" : "")">
                     <a href="javascript:void(0);" data-toggle="modal" data-target="#projectModal-@item.PortfolioId">
                         <div class="portfolio-item rounded shadow-dark">
                             <div class="details">
@@ -25,12 +49,19 @@
                         </div>
                     </a>
                 </div>
+                index++;
             }
         </div>
 
-        <div class="load-more text-center mt-4">
-            <a href="javascript:void(0);" class="btn btn-default"><i class="fas fa-spinner mr-2"></i> Daha Fazla Gör</a>
-        </div>
+        @if (Model.Count > 6)
+        {
+            <div class="load-more text-center mt-4">
+                <a href="javascript:void(0);" id="loadMoreBtn" class="btn btn-default">
+                    <i class="fas fa-plus mr-2"></i> Daha Fazla Gör
+                    <span class="badge ml-2" style="background: rgba(255,255,255,0.2);">@Model.Count proje</span>
+                </a>
+            </div>
+        }
     </div>
 </section>
 
@@ -43,19 +74,16 @@
                     <button type="button" class="close" data-dismiss="modal" style="position:absolute; right:25px; top:20px; font-size: 30px; z-index: 10;">&times;</button>
 
                     <div class="row">
-                        <!-- Sol Taraf - Ana Görsel -->
                         <div class="col-md-6 mb-4 mb-md-0">
                             <div class="modal-image-container">
                                 <img src="@item.ImageUrl" class="project-modal-img" alt="@item.ProjectTitle">
                             </div>
                         </div>
 
-                        <!-- Sağ Taraf - Proje Detayları -->
                         <div class="col-md-6">
                             <span class="text-muted small uppercase">@item.Category?.CategoryName</span>
                             <h3 class="font-weight-bold mb-3" style="color: #353353;">@item.ProjectTitle</h3>
 
-                            <!-- Teknoloji Rozetleri -->
                             <div class="mb-3">
                                 @if (!string.IsNullOrEmpty(item.TechStack))
                                 {
@@ -66,12 +94,10 @@
                                 }
                             </div>
 
-                            <!-- Açıklama -->
-                            <p class="text-muted mb-4" style="text-align: justify; line-height: 1.7; font-size: 14px;">
-                                @item.Description
-                            </p>
+                            <div class="text-muted mb-4" style="text-align: justify; line-height: 1.8; font-size: 14px;">
+                                @Html.Raw(ConvertUrlsToLinks(item.Description))
+                            </div>
 
-                            <!-- Proje Görselleri (Galeri) -->
                             @if (!string.IsNullOrEmpty(item.OtherImages))
                             {
                                 var imageList = item.OtherImages.Split(',').Select(img => img.Trim()).ToList();
@@ -85,7 +111,6 @@
                                 </div>
                             }
 
-                            <!-- GitHub Linki -->
                             @if (!string.IsNullOrEmpty(item.GithubUrl))
                             {
                                 <div class="mt-4">
@@ -101,3 +126,40 @@
         </div>
     </div>
 }
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (!loadMoreBtn) return;
+
+        var gridItems = document.querySelectorAll('.portfolio-wrapper .grid-item');
+        var initialShow = 6;
+        var increment = 3;
+        var currentlyShown = initialShow;
+        var totalItems = gridItems.length;
+
+        loadMoreBtn.addEventListener('click', function() {
+            var newCount = Math.min(currentlyShown + increment, totalItems);
+
+            for (var i = currentlyShown; i < newCount; i++) {
+                if (gridItems[i]) {
+                    gridItems[i].style.display = '';
+                }
+            }
+
+            currentlyShown = newCount;
+
+            // Isotope varsa layout'u güncelle
+            if (typeof $ !== 'undefined' && $('.portfolio-wrapper').data('isotope')) {
+                $('.portfolio-wrapper').isotope('layout');
+            }
+
+            // Tüm projeler gösterildiyse butonu değiştir
+            if (currentlyShown >= totalItems) {
+                loadMoreBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Tüm Projeler Gösteriliyor';
+                loadMoreBtn.style.pointerEvents = 'none';
+                loadMoreBtn.style.opacity = '0.7';
+            }
+        });
+    });
+</script>

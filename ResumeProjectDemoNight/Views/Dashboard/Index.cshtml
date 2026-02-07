@@ -1,0 +1,521 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+
+    var statistics = ViewBag.Statistics as List<ResumeProjectDemoNight.Entities.Statistic> ?? new List<ResumeProjectDemoNight.Entities.Statistic>();
+    var about = ViewBag.About as ResumeProjectDemoNight.Entities.About;
+    var recentMessages = ViewBag.RecentMessages as List<ResumeProjectDemoNight.Entities.Message> ?? new List<ResumeProjectDemoNight.Entities.Message>();
+    var recentProjects = ViewBag.RecentProjects as List<ResumeProjectDemoNight.Entities.Portfolio> ?? new List<ResumeProjectDemoNight.Entities.Portfolio>();
+    var experiences = ViewBag.Experiences as List<ResumeProjectDemoNight.Entities.Experience> ?? new List<ResumeProjectDemoNight.Entities.Experience>();
+    var socialMedias = ViewBag.SocialMedias as List<ResumeProjectDemoNight.Entities.SocialMedia> ?? new List<ResumeProjectDemoNight.Entities.SocialMedia>();
+    var topSkills = ViewBag.TopSkills as List<ResumeProjectDemoNight.Entities.Skill> ?? new List<ResumeProjectDemoNight.Entities.Skill>();
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<div class="min-h-screen p-6 lg:p-8">
+    <div class="max-w-7xl mx-auto space-y-6">
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <!-- HEADER SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div>
+                <h1 class="text-2xl lg:text-3xl font-bold text-white flex items-center gap-3">
+                    Dashboard
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-xs font-medium">
+                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                        Çevrimiçi
+                    </span>
+                </h1>
+                <p class="text-gray-500 mt-1">@DateTime.Now.ToString("dddd, dd MMMM yyyy")</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="/Portfolio/CreatePortfolio/" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold px-5 py-2.5 rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
+                    Yeni Proje
+                </a>
+            </div>
+        </div>
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <!-- STATISTICS CARDS (4 adet) -->
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        @if (statistics.Any())
+        {
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                @{
+                    var statStyles = new[] {
+                        new { gradient = "from-cyan-500 to-blue-600", bg = "bg-cyan-500/10", border = "border-cyan-500/20", text = "text-cyan-400", shadow = "shadow-cyan-500/10" },
+                        new { gradient = "from-violet-500 to-purple-600", bg = "bg-violet-500/10", border = "border-violet-500/20", text = "text-violet-400", shadow = "shadow-violet-500/10" },
+                        new { gradient = "from-emerald-500 to-teal-600", bg = "bg-emerald-500/10", border = "border-emerald-500/20", text = "text-emerald-400", shadow = "shadow-emerald-500/10" },
+                        new { gradient = "from-amber-500 to-orange-600", bg = "bg-amber-500/10", border = "border-amber-500/20", text = "text-amber-400", shadow = "shadow-amber-500/10" }
+                        };
+                    var idx = 0;
+                }
+                @foreach (var stat in statistics)
+                {
+                    var style = statStyles[idx % 4];
+                    // Değer formatla: 100.00 → "100", 1.50 → "1.5"
+                    var displayValue = stat.Value % 1 == 0
+                    ? ((int)stat.Value).ToString()
+                    : stat.Value.ToString("0.##").Replace(",", ".");
+
+                    <div class="group relative bg-gray-800/50 backdrop-blur-sm border @style.border rounded-2xl p-5 hover:shadow-xl @style.shadow transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-xs font-medium uppercase tracking-wider mb-2">@stat.Name</p>
+                                <div class="flex items-baseline gap-0">
+                                    <span class="text-4xl font-bold text-white">@displayValue</span>
+                                    <span class="text-4xl font-bold @style.text ml-0.5">@stat.Suffix</span>
+                                </div>
+                            </div>
+                            <div class="w-14 h-14 @style.bg rounded-2xl flex items-center justify-center border @style.border">
+                                <i class="@stat.IconUrl text-2xl @style.text"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r @style.gradient transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    </div>
+                    idx++;
+                }
+            </div>
+        }
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <!-- MAIN GRID - ROW 1 -->
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <div class="grid grid-cols-12 gap-6">
+
+            <!-- Profile Card (Kompakt) -->
+            <div class="col-span-12 lg:col-span-4">
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden h-full">
+                    @if (about != null)
+                    {
+                        <div class="p-5">
+                            <!-- Avatar & Info Row -->
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="relative flex-shrink-0">
+                                    <div class="w-16 h-16 rounded-xl overflow-hidden border-2 border-cyan-500/30 shadow-lg bg-gray-700">
+                                        @if (!string.IsNullOrEmpty(about.ImageUrl))
+                                        {
+                                            <img src="@about.ImageUrl" alt="Profile" class="w-full h-full object-cover">
+                                        }
+                                        else
+                                        {
+                                            <div class="w-full h-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                                                <span class="text-xl font-bold text-white">@(about.NameSurname?.Substring(0, 1).ToUpper())</span>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 rounded-md flex items-center justify-center border-2 border-gray-800">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-lg font-bold text-white truncate">@about.NameSurname</h3>
+                                    <p class="text-cyan-400 text-sm truncate">@about.Slider</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-4">@about.Description</p>
+                            <a href="/About/AboutList/" class="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-700/50 hover:bg-gray-700 text-gray-300 hover:text-white text-sm font-medium rounded-xl transition-all border border-gray-600/50">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                </svg>
+                                Profili Düzenle
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="p-6 text-center">
+                            <div class="w-16 h-16 bg-gray-700/50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <span class="material-symbols-outlined text-3xl text-gray-500">person_add</span>
+                            </div>
+                            <p class="text-gray-400 mb-4">Profil bilgisi eklenmemiş</p>
+                            <a href="/About/CreateAbout/" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">+ Profil Ekle</a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Quick Stats Grid (Genişletildi) -->
+            <div class="col-span-12 lg:col-span-4">
+                <div class="grid grid-cols-2 gap-4 h-full">
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-cyan-500/30 transition-colors">
+                        <div class="w-10 h-10 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-2">
+                            <span class="material-symbols-outlined text-cyan-400">folder_special</span>
+                        </div>
+                        <span class="text-2xl font-bold text-white">@ViewBag.TotalProjects</span>
+                        <span class="text-gray-500 text-xs">Toplam Proje</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/30 transition-colors">
+                        <div class="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-2">
+                            <span class="material-symbols-outlined text-emerald-400">check_circle</span>
+                        </div>
+                        <span class="text-2xl font-bold text-white">@ViewBag.ActiveProjects</span>
+                        <span class="text-gray-500 text-xs">Aktif Proje</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-violet-500/30 transition-colors">
+                        <div class="w-10 h-10 bg-violet-500/10 rounded-xl flex items-center justify-center mb-2">
+                            <span class="material-symbols-outlined text-violet-400">work</span>
+                        </div>
+                        <span class="text-2xl font-bold text-white">@ViewBag.TotalExperiences</span>
+                        <span class="text-gray-500 text-xs">Deneyim</span>
+                    </div>
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-amber-500/30 transition-colors">
+                        <div class="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center mb-2">
+                            <span class="material-symbols-outlined text-amber-400">star</span>
+                        </div>
+                        <span class="text-2xl font-bold text-white">@ViewBag.TotalSkills</span>
+                        <span class="text-gray-500 text-xs">Yetenek</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Experiences (Mesajlar yerine) -->
+            <div class="col-span-12 lg:col-span-4">
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden h-full flex flex-col">
+                    <div class="px-5 py-4 border-b border-gray-700/50 flex items-center justify-between">
+                        <h3 class="font-semibold text-white flex items-center gap-2">
+                            <span class="material-symbols-outlined text-violet-400 text-lg">work_history</span>
+                            Son Deneyimler
+                        </h3>
+                        <a href="/Experience/ExperienceList/" class="text-xs text-violet-400 hover:text-violet-300">Tümü →</a>
+                    </div>
+                    <div class="flex-1 overflow-hidden">
+                        @if (experiences.Any())
+                        {
+                            <div class="divide-y divide-gray-700/30">
+                                @foreach (var exp in experiences.Take(3))
+                                {
+                                    <a href="/Experience/UpdateExperience/@exp.ExperienceId" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-700/30 transition-colors">
+                                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 border border-violet-500/30 flex items-center justify-center flex-shrink-0">
+                                            <span class="text-violet-400 text-sm font-bold">@exp.CompanyName?.Substring(0, 1).ToUpper()</span>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <span class="font-medium text-white text-sm truncate block">@exp.CompanyName</span>
+                                            <p class="text-gray-500 text-xs truncate">@exp.Title</p>
+                                        </div>
+                                        <span class="text-gray-600 text-xs flex-shrink-0">@exp.WorkPeriodDate</span>
+                                    </a>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="flex flex-col items-center justify-center h-full py-8">
+                                <span class="material-symbols-outlined text-3xl text-gray-600 mb-2">work_off</span>
+                                <p class="text-gray-500 text-sm">Deneyim eklenmemiş</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <!-- MAIN GRID - ROW 2 -->
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <div class="grid grid-cols-12 gap-6">
+
+            <!-- Recent Projects -->
+            <div class="col-span-12 lg:col-span-8">
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden">
+                    <div class="px-5 py-4 border-b border-gray-700/50 flex items-center justify-between">
+                        <h3 class="font-semibold text-white flex items-center gap-2">
+                            <span class="material-symbols-outlined text-cyan-400 text-lg">layers</span>
+                            Son Projeler
+                        </h3>
+                        <a href="/Portfolio/PortfolioList/" class="text-xs text-cyan-400 hover:text-cyan-300">Tümü →</a>
+                    </div>
+                    <div class="p-5">
+                        @if (recentProjects.Any())
+                        {
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                @foreach (var project in recentProjects)
+                                {
+                                    <a href="/Portfolio/UpdatePortfolio/@project.PortfolioId" class="group block">
+                                        <div class="relative rounded-xl overflow-hidden bg-gray-700 aspect-[4/3]">
+                                            <!-- Image -->
+                                            <img src="@project.ImageUrl"
+                                                 alt="@project.ProjectTitle"
+                                                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                 onerror="this.style.display='none'">
+
+                                            <!-- Gradient Overlay -->
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+
+                                            <!-- Status Badge -->
+                                            @if (project.Status)
+                                            {
+                                                <div class="absolute top-3 left-3 px-2.5 py-1 bg-emerald-500 rounded-lg">
+                                                    <span class="text-white text-xs font-semibold">Aktif</span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="absolute top-3 left-3 px-2.5 py-1 bg-gray-600 rounded-lg">
+                                                    <span class="text-white text-xs font-semibold">Pasif</span>
+                                                </div>
+                                            }
+
+                                            <!-- Content (Inside Card - Bottom) -->
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <h4 class="text-white font-bold text-sm line-clamp-1 mb-2">
+                                                    @project.ProjectTitle
+                                                </h4>
+                                                <span class="inline-block px-2 py-0.5 bg-cyan-500/20 text-cyan-400 text-xs font-medium rounded-md border border-cyan-500/30">
+                                                    @project.Category?.CategoryName
+                                                </span>
+                                            </div>
+
+                                            <!-- Hover Border -->
+                                            <div class="absolute inset-0 border-2 border-transparent group-hover:border-cyan-500/50 rounded-xl transition-colors pointer-events-none"></div>
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center py-12">
+                                <div class="w-16 h-16 bg-gray-700/50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <span class="material-symbols-outlined text-3xl text-gray-500">folder_off</span>
+                                </div>
+                                <p class="text-gray-400 mb-4">Henüz proje eklenmemiş</p>
+                                <a href="/Portfolio/CreatePortfolio/" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm font-medium">
+                                    <span class="material-symbols-outlined text-lg">add</span>
+                                    İlk Projeyi Ekle
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Skills -->
+            <div class="col-span-12 lg:col-span-4">
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden h-full flex flex-col">
+                    <div class="px-5 py-4 border-b border-gray-700/50 flex items-center justify-between">
+                        <h3 class="font-semibold text-white flex items-center gap-2">
+                            <span class="material-symbols-outlined text-amber-400 text-lg">code</span>
+                            Yetenekler
+                        </h3>
+                        <a href="/Skill/SkillList/" class="text-xs text-amber-400 hover:text-amber-300">Tümü →</a>
+                    </div>
+                    <div class="p-5 flex-1">
+                        @if (topSkills.Any())
+                        {
+                            <div class="space-y-4">
+                                @foreach (var skill in topSkills.Take(5))
+                                {
+                                    <div>
+                                        <div class="flex items-center justify-between mb-1.5">
+                                            <span class="text-gray-300 text-sm">@skill.SkillName</span>
+                                            <span class="text-cyan-400 text-xs font-semibold">@skill.SkillDegree%</span>
+                                        </div>
+                                        <div class="h-2 bg-gray-700/50 rounded-full overflow-hidden">
+                                            <div class="h-full rounded-full transition-all duration-1000 ease-out bg-gradient-to-r from-cyan-500 to-blue-500"
+                                                 style="width: @(skill.SkillDegree)%"></div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="flex flex-col items-center justify-center h-full">
+                                <span class="material-symbols-outlined text-3xl text-gray-600 mb-2">psychology</span>
+                                <p class="text-gray-500 text-sm">Yetenek eklenmemiş</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <!-- MAIN GRID - ROW 3 -->
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <div class="grid grid-cols-12 gap-6">
+
+            <!-- Quick Actions -->
+            <div class="col-span-12 lg:col-span-6">
+                <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-5">
+                    <h3 class="font-semibold text-white flex items-center gap-2 mb-5">
+                        <span class="material-symbols-outlined text-rose-400 text-lg">bolt</span>
+                        Hızlı İşlemler
+                    </h3>
+                    <div class="grid grid-cols-4 gap-3">
+                        <a href="/Portfolio/CreatePortfolio/" class="group flex flex-col items-center gap-2 p-4 bg-cyan-500/5 hover:bg-cyan-500/10 border border-cyan-500/10 hover:border-cyan-500/30 rounded-xl transition-all">
+                            <div class="w-11 h-11 bg-cyan-500/10 group-hover:bg-cyan-500/20 rounded-xl flex items-center justify-center transition-colors">
+                                <span class="material-symbols-outlined text-cyan-400">add_box</span>
+                            </div>
+                            <span class="text-gray-400 group-hover:text-white text-xs font-medium transition-colors text-center">Proje</span>
+                        </a>
+                        <a href="/Experience/CreateExperience/" class="group flex flex-col items-center gap-2 p-4 bg-violet-500/5 hover:bg-violet-500/10 border border-violet-500/10 hover:border-violet-500/30 rounded-xl transition-all">
+                            <div class="w-11 h-11 bg-violet-500/10 group-hover:bg-violet-500/20 rounded-xl flex items-center justify-center transition-colors">
+                                <span class="material-symbols-outlined text-violet-400">work_history</span>
+                            </div>
+                            <span class="text-gray-400 group-hover:text-white text-xs font-medium transition-colors text-center">Deneyim</span>
+                        </a>
+                        <a href="/Skill/CreateSkill/" class="group flex flex-col items-center gap-2 p-4 bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/10 hover:border-emerald-500/30 rounded-xl transition-all">
+                            <div class="w-11 h-11 bg-emerald-500/10 group-hover:bg-emerald-500/20 rounded-xl flex items-center justify-center transition-colors">
+                                <span class="material-symbols-outlined text-emerald-400">code</span>
+                            </div>
+                            <span class="text-gray-400 group-hover:text-white text-xs font-medium transition-colors text-center">Yetenek</span>
+                        </a>
+                        <a href="/Service/CreateService/" class="group flex flex-col items-center gap-2 p-4 bg-amber-500/5 hover:bg-amber-500/10 border border-amber-500/10 hover:border-amber-500/30 rounded-xl transition-all">
+                            <div class="w-11 h-11 bg-amber-500/10 group-hover:bg-amber-500/20 rounded-xl flex items-center justify-center transition-colors">
+                                <span class="material-symbols-outlined text-amber-400">handyman</span>
+                            </div>
+                            <span class="text-gray-400 group-hover:text-white text-xs font-medium transition-colors text-center">Hizmet</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social & Extra Stats -->
+            <div class="col-span-12 lg:col-span-6">
+                <div class="grid grid-cols-2 gap-4 h-full">
+                    <!-- Social Media -->
+<div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-5">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold text-white text-sm flex items-center gap-2">
+            <span class="material-symbols-outlined text-blue-400 text-lg">share</span>
+            Sosyal Medya
+        </h3>
+        <a href="/SocialMedia/SocialMediaList/" class="text-xs text-blue-400 hover:text-blue-300">Düzenle →</a>
+    </div>
+    @if (socialMedias.Any())
+    {
+        <div class="flex flex-wrap gap-2">
+            @foreach (var social in socialMedias.Take(6))
+            {
+                // URL'den platform algıla
+                var url = social.SocialMediaURL?.ToLower() ?? "";
+                var iconClass = "fas fa-link";
+                var bgColor = "bg-gray-600";
+                var hoverColor = "hover:bg-gray-500";
+                
+                if (url.Contains("github"))
+                {
+                    iconClass = "fab fa-github";
+                    bgColor = "bg-gray-700";
+                    hoverColor = "hover:bg-gray-600";
+                }
+                else if (url.Contains("linkedin"))
+                {
+                    iconClass = "fab fa-linkedin-in";
+                    bgColor = "bg-blue-600";
+                    hoverColor = "hover:bg-blue-500";
+                }
+                else if (url.Contains("twitter") || url.Contains("x.com"))
+                {
+                    iconClass = "fab fa-x-twitter";
+                    bgColor = "bg-gray-800";
+                    hoverColor = "hover:bg-gray-700";
+                }
+                else if (url.Contains("instagram"))
+                {
+                    iconClass = "fab fa-instagram";
+                    bgColor = "bg-gradient-to-br from-purple-600 to-pink-500";
+                    hoverColor = "hover:from-purple-500 hover:to-pink-400";
+                }
+                else if (url.Contains("facebook"))
+                {
+                    iconClass = "fab fa-facebook-f";
+                    bgColor = "bg-blue-500";
+                    hoverColor = "hover:bg-blue-400";
+                }
+                else if (url.Contains("youtube"))
+                {
+                    iconClass = "fab fa-youtube";
+                    bgColor = "bg-red-600";
+                    hoverColor = "hover:bg-red-500";
+                }
+                else if (url.Contains("discord"))
+                {
+                    iconClass = "fab fa-discord";
+                    bgColor = "bg-indigo-600";
+                    hoverColor = "hover:bg-indigo-500";
+                }
+                else if (url.Contains("twitch"))
+                {
+                    iconClass = "fab fa-twitch";
+                    bgColor = "bg-purple-600";
+                    hoverColor = "hover:bg-purple-500";
+                }
+                else if (url.Contains("medium"))
+                {
+                    iconClass = "fab fa-medium";
+                    bgColor = "bg-gray-800";
+                    hoverColor = "hover:bg-gray-700";
+                }
+                else if (url.Contains("dribbble"))
+                {
+                    iconClass = "fab fa-dribbble";
+                    bgColor = "bg-pink-500";
+                    hoverColor = "hover:bg-pink-400";
+                }
+                else if (url.Contains("behance"))
+                {
+                    iconClass = "fab fa-behance";
+                    bgColor = "bg-blue-700";
+                    hoverColor = "hover:bg-blue-600";
+                }
+                
+                <a href="@social.SocialMediaURL" target="_blank" 
+                   class="w-10 h-10 @bgColor @hoverColor rounded-xl flex items-center justify-center transition-all shadow-lg">
+                    <i class="@iconClass text-white text-lg"></i>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-gray-500 text-xs">Sosyal medya eklenmemiş</p>
+    }
+</div>
+
+                    <!-- Extra Stats -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-5">
+                        <h3 class="font-semibold text-white text-sm flex items-center gap-2 mb-4">
+                            <span class="material-symbols-outlined text-teal-400 text-lg">analytics</span>
+                            Özet
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-500 text-xs">Hizmetler</span>
+                                <span class="text-white font-semibold">@ViewBag.TotalServices</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-500 text-xs">Referanslar</span>
+                                <span class="text-white font-semibold">@ViewBag.TotalTestimonials</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-500 text-xs">Toplam Mesaj</span>
+                                <span class="text-white font-semibold">@ViewBag.TotalMessages</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <!-- FOOTER -->
+        <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+        <div class="flex items-center justify-center pt-2">
+            <div class="inline-flex items-center gap-3 px-4 py-2 bg-gray-800/30 rounded-full border border-gray-700/30">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-gray-500 text-xs">Portfolio Admin Panel</span>
+                <span class="text-gray-600 text-xs">v1.0</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,6 @@
 ﻿@model List<ResumeProjectDemoNight.Entities.Experience>
 
 <style>
-
     .experience-section {
         padding: 60px 0;
     }
@@ -10,7 +9,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 320px; 
+        min-height: 320px;
         padding: 30px !important;
         position: relative;
         background: #fff;
@@ -18,16 +17,14 @@
         transition: all 0.3s ease;
     }
 
-
     .timeline-container .title {
-        min-height: 60px; 
+        min-height: 60px;
         display: flex;
-        align-items: center; 
+        align-items: center;
         margin-bottom: 5px;
         font-size: 18px;
         font-weight: 700;
     }
-
 
     .company-name {
         min-height: 20px;
@@ -45,7 +42,7 @@
 
     .exp-description {
         display: -webkit-box;
-        -webkit-line-clamp: 4; 
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -53,7 +50,7 @@
         color: #5E5C7F;
         line-height: 1.6;
         margin-bottom: 20px !important;
-        min-height: 90px; 
+        min-height: 90px;
     }
 
     .btn-read-more {
@@ -77,51 +74,249 @@
             color: #fff !important;
         }
 
-    .modal-content-custom {
-        border-radius: 15px;
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* PREMIUM MODAL STYLES */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    .premium-modal .modal-content {
         border: none;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+    }
+
+    .premium-modal .modal-header-custom {
+        background: linear-gradient(135deg, #FF4C60 0%, #FF6B6B 50%, #ee5a6f 100%);
+        padding: 0;
+        border: none;
+        position: relative;
         overflow: hidden;
     }
 
-    .modal-header-premium {
-        background: #353353;
-        padding: 35px 40px;
-        color: white;
-        text-align: left;
+        /* Decorative background pattern */
+        .premium-modal .modal-header-custom::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .premium-modal .modal-header-custom::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+    .premium-modal .header-content {
         position: relative;
+        z-index: 1;
+        padding: 40px 40px 35px;
     }
 
-    .close-modal-btn {
+    .premium-modal .close-btn {
         position: absolute;
-        right: 25px;
-        top: 25px;
-        color: rgba(255,255,255,0.7);
-        font-size: 28px;
-        background: none;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.15);
         border: none;
-        cursor: pointer;
-    }
-
-    .modal-company-accent {
-        color: #FF4C60;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        font-size: 13px;
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    .modal-job-title {
-        font-weight: 800;
-        font-size: 28px;
-        margin-bottom: 5px;
+        border-radius: 12px;
         color: white;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        backdrop-filter: blur(10px);
     }
 
-    .modal-date {
-        color: rgba(255,255,255,0.6);
+        .premium-modal .close-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: rotate(90deg);
+        }
+
+    .premium-modal .company-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 8px 16px;
+        border-radius: 30px;
+        margin-bottom: 20px;
+    }
+
+        .premium-modal .company-badge i {
+            font-size: 14px;
+        }
+
+        .premium-modal .company-badge span {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+
+    .premium-modal .modal-job-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+
+    .premium-modal .date-location {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .premium-modal .info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.85);
         font-size: 14px;
+    }
+
+        .premium-modal .info-item i {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+    .premium-modal .modal-body-custom {
+        padding: 40px;
+        background: #fff;
+    }
+
+    .premium-modal .section-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f5f5f5;
+    }
+
+        .premium-modal .section-header .icon-box {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #FF4C60 0%, #FF6B6B 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .premium-modal .section-header h5 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #353353;
+            margin: 0;
+        }
+
+    .premium-modal .description-text {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #5E5C7F;
+        text-align: justify;
+    }
+
+    .premium-modal .modal-footer-custom {
+        padding: 20px 40px 30px;
+        background: #fff;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .premium-modal .footer-info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #a0a0a0;
+        font-size: 13px;
+    }
+
+        .premium-modal .footer-info i {
+            color: #FF4C60;
+        }
+
+    .premium-modal .btn-close-modal {
+        background: linear-gradient(135deg, #FF4C60 0%, #FF6B6B 100%);
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .premium-modal .btn-close-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 76, 96, 0.35);
+        }
+
+    /* Animation */
+    .premium-modal.fade .modal-dialog {
+        transform: scale(0.9) translateY(-30px);
+        transition: transform 0.3s ease-out;
+    }
+
+    .premium-modal.show .modal-dialog {
+        transform: scale(1) translateY(0);
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .premium-modal .header-content {
+            padding: 30px 25px;
+        }
+
+        .premium-modal .modal-job-title {
+            font-size: 22px;
+        }
+
+        .premium-modal .modal-body-custom {
+            padding: 25px;
+        }
+
+        .premium-modal .modal-footer-custom {
+            padding: 20px 25px;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .premium-modal .date-location {
+            flex-direction: column;
+            gap: 12px;
+        }
     }
 </style>
 
@@ -203,28 +398,62 @@
     </div>
 </section>
 
+<!-- Premium Modals -->
 @foreach (var item in Model)
 {
-    <div class="modal fade" id="expModal-@item.ExperienceId" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade premium-modal" id="expModal-@item.ExperienceId" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content modal-content-custom shadow-lg">
-                <div class="modal-header-premium">
-                    <button type="button" class="close-modal-btn" data-dismiss="modal">&times;</button>
-                    <span class="modal-company-accent">@item.CompanyName</span>
-                    <h2 class="modal-job-title">@item.Title</h2>
-                    <span class="modal-date"><i class="far fa-calendar-alt mr-2"></i>@item.WorkPeriodDate</span>
+            <div class="modal-content">
+
+                <!-- Header -->
+                <div class="modal-header-custom">
+                    <button type="button" class="close-btn" data-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="header-content">
+                        <div class="company-badge">
+                            <i class="fas fa-building"></i>
+                            <span>@item.CompanyName</span>
+                        </div>
+                        <h2 class="modal-job-title">@item.Title</h2>
+                        <div class="date-location">
+                            <div class="info-item">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>@item.WorkPeriodDate</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Tam Zamanlı</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body p-5">
-                    <h5 class="font-weight-bold mb-4 pb-2" style="color: #353353; border-bottom: 2px solid #f1f1f1;">
-                        Proje ve Sorumluluklar
-                    </h5>
-                    <p style="text-align: justify; line-height: 1.9; color: #5E5C7F; font-size: 15px;">
+
+                <!-- Body -->
+                <div class="modal-body-custom">
+                    <div class="section-header">
+                        <div class="icon-box">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h5>Görev & Sorumluluklar</h5>
+                    </div>
+                    <p class="description-text">
                         @item.Description
                     </p>
                 </div>
-                <div class="modal-footer border-0 bg-light p-3 justify-content-start">
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Pencereyi Kapat</button>
+
+                <!-- Footer -->
+                <div class="modal-footer-custom">
+                    <div class="footer-info">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Detaylı bilgi için iletişime geçebilirsiniz</span>
+                    </div>
+                    <button type="button" class="btn-close-modal" data-dismiss="modal">
+                        <i class="fas fa-check"></i>
+                        Tamam
+                    </button>
                 </div>
+
             </div>
         </div>
     </div>

@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Hassas ayar dosyaları - GitHub'a gitmemeli!
+appsettings.Production.json
+appsettings.Development.json

@@ -9,61 +9,91 @@
         </div>
     </div>
     <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1 custom-scrollbar">
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Dashboard/Index/">
             <span class="material-symbols-outlined">dashboard</span>
             <span class="text-sm font-medium">Dashboard</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/About/AboutList/">
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/About/AboutList/">
             <span class="material-symbols-outlined">person</span>
             <span class="text-sm font-medium">Hakkımda</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Experience/ExperienceList/">
-            <span class="material-symbols-outlined">work</span>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Experience/ExperienceList/">
+            <span class="material-symbols-outlined">work_history</span>
             <span class="text-sm font-medium">Deneyimlerim</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Skill/SkillList/">
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Certificate/CertificateList/">
+            <span class="material-symbols-outlined">workspace_premium</span>
+            <span class="text-sm font-medium">Sertifikalarım</span>
+        </a>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Skill/SkillList/">
             <span class="material-symbols-outlined">code</span>
             <span class="text-sm font-medium">Yeteneklerim</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white sidebar-item-active transition-colors" href="/Statistic/StatisticList/">
-            <span class="material-symbols-outlined">design_services</span>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Statistic/StatisticList/">
+            <span class="material-symbols-outlined">bar_chart</span>
             <span class="text-sm font-medium">İstatistiklerim</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Service/ServiceList/">
-            <span class="material-symbols-outlined">design_services</span>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Service/ServiceList/">
+            <span class="material-symbols-outlined">home_repair_service</span>
             <span class="text-sm font-medium">Hizmetler</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/SocialMedia/SocialMediaList/">
-            <span class="material-symbols-outlined">design_services</span>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/SocialMedia/SocialMediaList/">
+            <span class="material-symbols-outlined">share</span>
             <span class="text-sm font-medium">Sosyal Medyalar</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white sidebar-item-active transition-colors" href="/Portfolio/PortfolioList/">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
-            <span class="text-sm font-semibold">Projelerim</span>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Portfolio/PortfolioList/">
+            <span class="material-symbols-outlined">layers</span>
+            <span class="text-sm font-medium">Projelerim</span>
         </a>
-
-        @* <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
-                <span class="material-symbols-outlined">verified</span>
-                <span class="text-sm font-medium">Certificates</span>
-            </a> *@
-
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Testimonial/TestimonialList/">
-            <span class="material-symbols-outlined">forum</span>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Testimonial/TestimonialList/">
+            <span class="material-symbols-outlined">format_quote</span>
             <span class="text-sm font-medium">Referanslarım</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Message/MessageList/">
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Message/MessageList/">
             <span class="material-symbols-outlined">mail</span>
             <span class="text-sm font-medium">Mesajlar</span>
         </a>
     </nav>
     <div class="p-4 border-t border-slate-800 space-y-1">
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="#">
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors" href="/Settings/Index/">
             <span class="material-symbols-outlined">settings</span>
             <span class="text-sm font-medium">Ayarlar</span>
         </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-colors" href="#">
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-colors" href="/Auth/Logout">
             <span class="material-symbols-outlined" style="color: inherit;">logout</span>
             <span class="text-sm font-medium">Çıkış</span>
         </a>
     </div>
 </aside>
+
+<!-- Aktif Sayfa JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPath = window.location.pathname.toLowerCase();
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        sidebarLinks.forEach(link => {
+            const href = link.getAttribute('href').toLowerCase();
+
+            // URL path'i ile href'i karşılaştır
+            if (currentPath.includes(href.split('/')[1])) {
+                // Aktif stili ekle
+                link.classList.remove('text-slate-400');
+                link.classList.add('text-white', 'bg-slate-800/50', 'border-l-2', 'border-cyan-500');
+
+                // İkonu doldur
+                const icon = link.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                }
+
+                // Font weight
+                const text = link.querySelector('.text-sm');
+                if (text) {
+                    text.classList.remove('font-medium');
+                    text.classList.add('font-semibold');
+                }
+            }
+        });
+    });
+</script>

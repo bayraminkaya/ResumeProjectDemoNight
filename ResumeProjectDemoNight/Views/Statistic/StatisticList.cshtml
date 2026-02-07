@@ -68,6 +68,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 @foreach (var item in Model)
                 {
+                    // Değer formatla: 100.00 → "100", 1.50 → "1.5"
+                    var displayValue = item.Value % 1 == 0
+                    ? ((int)item.Value).ToString()
+                    : item.Value.ToString("0.##").Replace(",", ".");
+
                     <div class="group relative bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-rose-500/40 transition-all duration-500 hover:shadow-2xl hover:shadow-rose-500/10 hover:-translate-y-1 overflow-hidden">
 
                         <!-- Background Glow -->
@@ -80,12 +85,10 @@
                             </div>
                         </div>
 
-                        <!-- Value -->
-                        <div class="relative mb-2">
-                            <span class="text-4xl font-bold text-white group-hover:text-rose-400 transition-colors">
-                                @item.Value
-                            </span>
-                            <span class="text-2xl font-bold text-rose-400 ml-1">@item.Suffix</span>
+                        <!-- Value & Suffix -->
+                        <div class="relative mb-2 flex items-baseline gap-0">
+                            <span class="text-4xl font-bold text-white group-hover:text-rose-400 transition-colors">@displayValue</span>
+                            <span class="text-4xl font-bold text-rose-400 ml-0.5">@item.Suffix</span>
                         </div>
 
                         <!-- Name -->

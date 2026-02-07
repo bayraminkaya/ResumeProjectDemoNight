@@ -62,18 +62,20 @@
                                placeholder="100"
                                class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
                                required>
+                        <p class="text-gray-500 text-xs mt-1">Tam sayı: 100, Ondalık: 1.5</p>
                     </div>
 
                     <!-- Suffix -->
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">
-                            Sonek
+                            Sonek <span class="text-red-400">*</span>
                         </label>
                         <input type="text"
                                asp-for="Suffix"
                                id="suffixInput"
-                               placeholder="+ veya K, M, B+"
-                               class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all">
+                               placeholder="+"
+                               class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+                               required>
                         <p class="text-gray-500 text-xs mt-1">Örn: +, K, M, B+, %</p>
                     </div>
                 </div>
@@ -94,35 +96,35 @@
                     <div class="mt-3">
                         <p class="text-gray-500 text-xs mb-2">Hızlı seçim:</p>
                         <div class="flex flex-wrap gap-2">
-                            <button type="button" onclick="setIcon('fas fa-fire')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Fire">
-                                <i class="fas fa-fire text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-fire')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Fire">
+                                <i class="fas fa-fire text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-laptop-code')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Laptop">
-                                <i class="fas fa-laptop-code text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-laptop-code')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Laptop">
+                                <i class="fas fa-laptop-code text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-globe')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Globe">
-                                <i class="fas fa-globe text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-globe-americas')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Globe">
+                                <i class="fas fa-globe-americas text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-award')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Award">
-                                <i class="fas fa-award text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-award')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Award">
+                                <i class="fas fa-award text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-users')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Users">
-                                <i class="fas fa-users text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-users')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Users">
+                                <i class="fas fa-users text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-code')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Code">
-                                <i class="fas fa-code text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-code')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Code">
+                                <i class="fas fa-code text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-coffee')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Coffee">
-                                <i class="fas fa-coffee text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-coffee')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Coffee">
+                                <i class="fas fa-coffee text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-star')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Star">
-                                <i class="fas fa-star text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-star')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Star">
+                                <i class="fas fa-star text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-heart')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Heart">
-                                <i class="fas fa-heart text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-rocket')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Rocket">
+                                <i class="fas fa-rocket text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
-                            <button type="button" onclick="setIcon('fas fa-rocket')" class="p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Rocket">
-                                <i class="fas fa-rocket text-gray-400 group-hover:text-rose-400"></i>
+                            <button type="button" onclick="setIcon('fas fa-trophy')" class="icon-btn p-3 bg-gray-700/50 hover:bg-rose-500/20 rounded-lg transition-all group" title="Trophy">
+                                <i class="fas fa-trophy text-lg text-gray-400 group-hover:text-rose-400"></i>
                             </button>
                         </div>
                     </div>
@@ -133,15 +135,15 @@
                     <label class="block text-sm font-medium text-gray-300 mb-3">Önizleme</label>
                     <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-700/50">
                         <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center border border-rose-500/30">
-                                <i id="previewIcon" class="fas fa-fire text-2xl text-rose-400"></i>
+                            <div class="w-16 h-16 bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center border border-rose-500/30">
+                                <i id="previewIcon" class="fas fa-fire text-3xl text-rose-400"></i>
                             </div>
                             <div>
-                                <div class="flex items-baseline gap-1">
-                                    <span id="previewValue" class="text-3xl font-bold text-white">0</span>
-                                    <span id="previewSuffix" class="text-xl font-bold text-rose-400">+</span>
+                                <div class="flex items-baseline gap-0">
+                                    <span id="previewValue" class="text-4xl font-bold text-white">100</span>
+                                    <span id="previewSuffix" class="text-4xl font-bold text-rose-400 ml-0.5">+</span>
                                 </div>
-                                <p id="previewName" class="text-gray-400">İstatistik Adı</p>
+                                <p id="previewName" class="text-gray-400 mt-1">İstatistik Adı</p>
                             </div>
                         </div>
                     </div>
@@ -182,7 +184,12 @@
     });
 
     valueInput?.addEventListener('input', function() {
-        previewValue.textContent = this.value || '0';
+        let val = this.value || '0';
+        // Ondalık varsa nokta ile göster, yoksa düz göster
+        if (val.includes('.') || val.includes(',')) {
+            val = parseFloat(val.replace(',', '.')).toString();
+        }
+        previewValue.textContent = val;
     });
 
     suffixInput?.addEventListener('input', function() {
@@ -190,11 +197,19 @@
     });
 
     iconInput?.addEventListener('input', function() {
-        previewIcon.className = this.value + ' text-2xl text-rose-400';
+        previewIcon.className = this.value + ' text-3xl text-rose-400';
     });
 
     function setIcon(iconClass) {
         iconInput.value = iconClass;
-        previewIcon.className = iconClass + ' text-2xl text-rose-400';
+        previewIcon.className = iconClass + ' text-3xl text-rose-400';
+
+        // Seçili ikonu vurgula
+        document.querySelectorAll('.icon-btn').forEach(btn => {
+            btn.classList.remove('bg-rose-500/20', 'border', 'border-rose-500/50');
+            btn.classList.add('bg-gray-700/50');
+        });
+        event.currentTarget.classList.remove('bg-gray-700/50');
+        event.currentTarget.classList.add('bg-rose-500/20', 'border', 'border-rose-500/50');
     }
 </script>

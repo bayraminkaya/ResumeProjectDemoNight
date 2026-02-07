@@ -1,0 +1,121 @@
+﻿@model ResumeProjectDemoNight.Entities.Certificate
+@{
+    ViewData["Title"] = "CreateCertificate";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<div class="p-6 lg:p-8">
+    <div class="max-w-2xl mx-auto">
+
+        <!-- Header -->
+        <div class="flex items-center gap-4 mb-8">
+            <a href="/Certificate/CertificateList/" class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-xl transition-all">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <div>
+                <h1 class="text-2xl font-bold text-white">Yeni Sertifika</h1>
+                <p class="text-gray-400 text-sm">Sertifika bilgilerini girin</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form action="/Certificate/CreateCertificate/" method="post" class="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 space-y-5">
+
+            <!-- Name -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Sertifika Adı *</label>
+                <input type="text" name="Name" required placeholder="Örn: Microsoft Azure Fundamentals"
+                       class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500">
+            </div>
+
+            <!-- Issuer -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Veren Kurum *</label>
+                <input type="text" name="Issuer" required placeholder="Örn: Microsoft, Google, Udemy"
+                       class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500">
+            </div>
+
+            <!-- Issue Date -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Alınma Tarihi *</label>
+                <input type="text" name="IssueDate" required placeholder="Örn: Ocak 2024"
+                       class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500">
+            </div>
+
+            <!-- Credential URL -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Doğrulama Linki</label>
+                <input type="url" name="CredentialUrl" placeholder="https://www.credential.net/..."
+                       class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500">
+                <p class="text-gray-500 text-xs mt-1">Sertifika doğrulama sayfasının linki</p>
+            </div>
+
+            <!-- Icon -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">İkon</label>
+                <input type="text" name="IconUrl" id="iconInput" placeholder="Örn: fab fa-microsoft"
+                       class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500">
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <button type="button" onclick="setIcon('fab fa-microsoft')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="Microsoft">
+                        <i class="fab fa-microsoft text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fab fa-google')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="Google">
+                        <i class="fab fa-google text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fab fa-aws')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="AWS">
+                        <i class="fab fa-aws text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fas fa-certificate')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="Sertifika">
+                        <i class="fas fa-certificate text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fas fa-award')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="Ödül">
+                        <i class="fas fa-award text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fas fa-graduation-cap')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="Mezuniyet">
+                        <i class="fas fa-graduation-cap text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fab fa-linkedin')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="LinkedIn">
+                        <i class="fab fa-linkedin text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fas fa-code')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="Kod">
+                        <i class="fas fa-code text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fas fa-database')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="Veritabanı">
+                        <i class="fas fa-database text-gray-300"></i>
+                    </button>
+                    <button type="button" onclick="setIcon('fas fa-shield-alt')" class="icon-btn p-2 bg-gray-700/50 hover:bg-amber-500/20 rounded-lg transition-all" title="Güvenlik">
+                        <i class="fas fa-shield-alt text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="flex items-center gap-3">
+                <input type="checkbox" name="Status" value="true" checked id="statusCheck"
+                       class="w-5 h-5 rounded border-gray-600 bg-gray-900/50 text-amber-500 focus:ring-amber-500">
+                <label for="statusCheck" class="text-gray-300">Aktif (Önyüzde göster)</label>
+            </div>
+
+            <!-- Submit -->
+            <div class="flex gap-3 pt-4">
+                <button type="submit" class="flex-1 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">save</span>
+                    Kaydet
+                </button>
+                <a href="/Certificate/CertificateList/" class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-all flex items-center justify-center">
+                    İptal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function setIcon(iconClass) {
+        document.getElementById('iconInput').value = iconClass;
+        document.querySelectorAll('.icon-btn').forEach(btn => btn.classList.remove('bg-amber-500/30', 'ring-2', 'ring-amber-500'));
+        event.target.closest('.icon-btn').classList.add('bg-amber-500/30', 'ring-2', 'ring-amber-500');
+    }
+</script>

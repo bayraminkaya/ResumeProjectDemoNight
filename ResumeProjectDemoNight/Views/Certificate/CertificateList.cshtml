@@ -1,0 +1,95 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Certificate>
+@{
+    ViewData["Title"] = "CertificateList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<div class="p-6 lg:p-8">
+    <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span class="material-symbols-outlined text-white text-xl">workspace_premium</span>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-white">Sertifikalarım</h1>
+                    <p class="text-gray-400 text-sm">@Model.Count sertifika</p>
+                </div>
+            </div>
+            <a href="/Certificate/CreateCertificate/" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-amber-500/25">
+                <span class="material-symbols-outlined text-lg">add</span>
+                Yeni Sertifika
+            </a>
+        </div>
+
+        <!-- Certificates Grid -->
+        @if (Model.Any())
+        {
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach (var cert in Model)
+                {
+                    <div class="group bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-5 hover:border-amber-500/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/10">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/30">
+                                @if (!string.IsNullOrEmpty(cert.IconUrl))
+                                {
+                                    <i class="@cert.IconUrl text-xl text-amber-400"></i>
+                                }
+                                else
+                                {
+                                    <span class="material-symbols-outlined text-amber-400">verified</span>
+                                }
+                            </div>
+                            <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <a href="/Certificate/UpdateCertificate/@cert.CertificateId" class="p-2 text-gray-400 hover:text-amber-400 hover:bg-amber-500/10 rounded-lg transition-all">
+                                    <span class="material-symbols-outlined text-lg">edit</span>
+                                </a>
+                                <a href="/Certificate/DeleteCertificate/@cert.CertificateId" onclick="return confirm('Bu sertifikayı silmek istediğinize emin misiniz?')" class="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+                                    <span class="material-symbols-outlined text-lg">delete</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-white font-semibold mb-1 line-clamp-2">@cert.Name</h3>
+                        <p class="text-amber-400 text-sm font-medium mb-2">@cert.Issuer</p>
+                        <p class="text-gray-500 text-xs mb-3">
+                            <i class="far fa-calendar-alt mr-1"></i> @cert.IssueDate
+                        </p>
+                        
+                        @if (!string.IsNullOrEmpty(cert.CredentialUrl))
+                        {
+                            <a href="@cert.CredentialUrl" target="_blank" class="inline-flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300">
+                                <i class="fas fa-external-link-alt"></i> Sertifikayı Doğrula
+                            </a>
+                        }
+                        
+                        <div class="mt-3 pt-3 border-t border-gray-700/50 flex items-center justify-between">
+                            <span class="text-xs @(cert.Status ? "text-emerald-400" : "text-gray-500")">
+                                <i class="fas fa-circle text-[8px] mr-1"></i>
+                                @(cert.Status ? "Aktif" : "Pasif")
+                            </span>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="bg-gray-800/50 border border-gray-700/50 rounded-2xl p-12 text-center">
+                <div class="w-20 h-20 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="material-symbols-outlined text-4xl text-gray-500">workspace_premium</span>
+                </div>
+                <h3 class="text-white font-semibold mb-2">Henüz sertifika eklenmemiş</h3>
+                <p class="text-gray-500 text-sm mb-4">İlk sertifikanızı ekleyerek başlayın</p>
+                <a href="/Certificate/CreateCertificate/" class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300">
+                    <span class="material-symbols-outlined">add</span>
+                    Sertifika Ekle
+                </a>
+            </div>
+        }
+    </div>
+</div>
