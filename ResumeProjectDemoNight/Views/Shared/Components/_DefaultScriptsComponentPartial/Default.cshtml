@@ -1,6 +1,7 @@
-﻿	<!-- Go to top button -->
+﻿<!-- Go to top button -->
 <a href="javascript:" id="return-to-top"><i class="fas fa-arrow-up"></i></a>
-	<!-- SCRIPTS -->
+
+<!-- SCRIPTS -->
 <script src="/templates/js/jquery-1.12.3.min.js"></script>
 <script src="/templates/js/jquery.easing.min.js"></script>
 <script src="/templates/js/jquery.waypoints.min.js"></script>
@@ -19,3 +20,151 @@
 <script src="/templates/js/jquery.magnific-popup.min.js"></script>
 <script src="/templates/js/custom.js"></script>
 <script src="/templates/js/lightbox-gallery-fixed.js"></script>
+
+<!-- Google Translate -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'tr',
+            includedLanguages: 'en,de,tr',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    function setLanguage(lang) {
+        // Bayrak aktifliğini güncelle
+        var allFlags = document.querySelectorAll('.lang-img');
+        for (var i = 0; i < allFlags.length; i++) {
+            allFlags[i].classList.remove('active');
+        }
+        var activeFlag = document.getElementById('lang-' + lang);
+        if (activeFlag) {
+            activeFlag.classList.add('active');
+        }
+
+        // Dil tercihini kaydet
+        localStorage.setItem('selectedLang', lang);
+
+        // Cookie ile dil ayarla
+        var domain = window.location.hostname;
+
+        if (lang === 'tr') {
+            // Türkçe - çeviriyi kaldır
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + domain;
+            document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + domain;
+        } else {
+            // Diğer diller
+            document.cookie = "googtrans=/tr/" + lang + "; path=/";
+            document.cookie = "googtrans=/tr/" + lang + "; path=/; domain=" + domain;
+            document.cookie = "googtrans=/tr/" + lang + "; path=/; domain=." + domain;
+        }
+
+        // Sayfayı yenile
+        window.location.reload();
+    }
+
+    // Sayfa yüklendiğinde kayıtlı dili işaretle
+    document.addEventListener('DOMContentLoaded', function() {
+        var savedLang = localStorage.getItem('selectedLang') || 'tr';
+        var activeFlag = document.getElementById('lang-' + savedLang);
+        if (activeFlag) {
+            activeFlag.classList.add('active');
+        }
+    });
+
+    // Google Translate toolbar'ı sürekli gizle
+    setInterval(function() {
+        var frame = document.querySelector('.goog-te-banner-frame');
+        if (frame) {
+            frame.style.display = 'none';
+        }
+        var body = document.body;
+        if (body) {
+            body.style.top = '0px';
+        }
+    }, 100);
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<div id="google_translate_element" style="display:none !important; visibility:hidden !important; height:0 !important;"></div>
+
+<!-- Google Translate UI Tamamen Gizle -->
+<style>
+    /* Üst banner/toolbar */
+    .goog-te-banner-frame,
+    .goog-te-balloon-frame,
+    #goog-gt-tt,
+    .goog-te-spinner-pos,
+    .goog-te-gadget,
+    .skiptranslate,
+    .goog-tooltip,
+    .goog-tooltip:hover,
+    .VIpgJd-ZVi9od-ORHb-OEVmcd,
+    .VIpgJd-ZVi9od-l4eHX-hSRGPd,
+    #goog-gt-vt,
+    .goog-te-ftab-float,
+    .goog-te-menu-value,
+    .goog-te-menu-frame,
+    #google_translate_element,
+    .goog-logo-link,
+    .goog-te-gadget-simple,
+    .goog-te-gadget-icon {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Body'nin üst boşluğunu kaldır */
+    body {
+        top: 0 !important;
+        position: static !important;
+    }
+
+    /* iframe banner'ı gizle */
+    iframe.goog-te-banner-frame,
+    iframe.skiptranslate,
+    iframe[name="google_conversion_frame"] {
+        display: none !important;
+        height: 0 !important;
+        width: 0 !important;
+        border: none !important;
+    }
+
+    /* Highlight efektini kaldır */
+    .goog-text-highlight {
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    /* Google logo ve powered by */
+    .goog-logo-link,
+    .goog-te-gadget span,
+    #goog-gt-tt,
+    .goog-te-balloon-frame,
+    div#goog-gt-tt,
+    .goog-te-ftab-float {
+        display: none !important;
+    }
+
+    /* Translated by Google popup */
+    .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+    .VIpgJd-ZVi9od-aZ2wEe-OiiCO {
+        display: none !important;
+    }
+
+    /* Sayfanın kaymasını engelle */
+    html.translated-ltr,
+    html.translated-rtl {
+        margin-top: 0 !important;
+    }
+
+        html.translated-ltr body,
+        html.translated-rtl body {
+            margin-top: 0 !important;
+            top: 0 !important;
+        }
+</style>

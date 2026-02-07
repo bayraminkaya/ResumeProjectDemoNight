@@ -1,4 +1,4 @@
-﻿	<!-- mobile header -->
+﻿<!-- mobile header -->
 <header class="mobile-header-1">
 	<div class="container">
 		<!-- menu icon -->
@@ -18,13 +18,53 @@
 
 <!-- desktop header -->
 <header class="desktop-header-1 d-flex align-items-start flex-column">
-
 	<!-- logo image -->
 	<div class="site-logo">
 		<a href="index.html">
 			<img src="/templates/images/logo.svg" alt="Bolby" />
 		</a>
 	</div>
+
+	<!-- Dil Seçici -->
+	<div class="language-switcher text-center" style="margin: 15px 0; width: 100%;">
+		<div class="d-inline-flex align-items-center" style="background: rgba(255,255,255,0.05); padding: 8px 14px; border-radius: 30px; gap: 6px;">
+			<a href="javascript:void(0);" class="lang-flag" onclick="setLanguage('tr')" title="Türkçe">
+				<img src="https://flagcdn.com/w40/tr.png" alt="TR" class="lang-img" id="lang-tr">
+			</a>
+			<span style="color: rgba(255,255,255,0.15); margin: 0 2px;">|</span>
+			<a href="javascript:void(0);" class="lang-flag" onclick="setLanguage('en')" title="English">
+				<img src="https://flagcdn.com/w40/gb.png" alt="EN" class="lang-img" id="lang-en">
+			</a>
+			<span style="color: rgba(255,255,255,0.15); margin: 0 2px;">|</span>
+			<a href="javascript:void(0);" class="lang-flag" onclick="setLanguage('de')" title="Deutsch">
+				<img src="https://flagcdn.com/w40/de.png" alt="DE" class="lang-img" id="lang-de">
+			</a>
+		</div>
+	</div>
+
+	<style>
+		.lang-img {
+			width: 26px;
+			height: 18px;
+			border-radius: 4px;
+			object-fit: cover;
+			opacity: 0.5;
+			transition: all 0.3s ease;
+			cursor: pointer;
+			border: 2px solid transparent;
+		}
+
+		.lang-flag:hover .lang-img {
+			opacity: 1;
+			transform: scale(1.15);
+		}
+
+		.lang-img.active {
+			opacity: 1 !important;
+			border-color: #FF4C60 !important;
+			box-shadow: 0 2px 10px rgba(255, 76, 96, 0.4);
+		}
+	</style>
 
 	<!-- main menu -->
 	<nav>
@@ -43,5 +83,4 @@
 		<!-- copyright text -->
 		<span class="copyright">© @DateTime.Now.Year Bayram İnkaya</span>
 	</div>
-
 </header>

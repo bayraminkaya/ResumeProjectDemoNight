@@ -1,7 +1,7 @@
 ﻿@model List<ResumeProjectDemoNight.Entities.Skill>
 
 <div class="skills-wrapper">
-    @foreach (var item in Model.Take(6)) 
+    @foreach (var item in Model.Take(6))
     {
         <div class="skill-item mb-4">
             <div class="skill-info clearfix">
@@ -21,58 +21,285 @@
     </div>
 </div>
 
+<!-- Premium Skills Modal -->
 <div class="modal fade" id="allSkillsModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 15px;">
-            <div class="modal-header border-0 bg-light rounded-top p-4">
-                <h5 class="modal-title font-weight-bold" style="color: #353353;">
-                    <i class="fas fa-tools mr-2 text-primary"></i> Teknik Uzmanlık Yığınım
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-4" style="max-height: 70vh; overflow-y: auto;">
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <h6 class="font-weight-bold"><i class="fas fa-code mr-2 text-danger"></i> Programlama Dilleri</h6>
-                        <p class="small text-secondary mt-2">C#, SQL (T-SQL), JavaScript (ES6+), Python, Java, HTML5, CSS3 (Sass)</p>
-                    </div>
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 24px; overflow: hidden;">
 
-                    <div class="col-md-6 mb-4">
-                        <h6 class="font-weight-bold"><i class="fas fa-layer-group mr-2 text-primary"></i> Backend & Mimari</h6>
-                        <p class="small text-secondary mt-2">.NET Core/Framework, ASP.NET Core, MVC, Web API, EF Core, LINQ; Clean & N-Tier Architecture, SOLID, DI</p>
-                    </div>
+            <!-- Gradient Header -->
+            <div class="modal-header border-0 position-relative" style="background: linear-gradient(135deg, #353353 0%, #4a4870 50%, #353353 100%); padding: 35px 40px;">
+                <!-- Decorative Elements -->
+                <div style="position: absolute; top: -30px; right: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.03); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -20px; left: 20%; width: 80px; height: 80px; background: rgba(255,255,255,0.02); border-radius: 50%;"></div>
 
-                    <div class="col-md-6 mb-4">
-                        <h6 class="font-weight-bold"><i class="fas fa-shield-alt mr-2 text-success"></i> Güvenlik & Kimlik Doğrulama</h6>
-                        <p class="small text-secondary mt-2">Authentication/Authorization, JWT, ASP.NET Identity, OWASP Farkındalığı</p>
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <h6 class="font-weight-bold"><i class="fas fa-laptop-code mr-2 text-info"></i> Frontend & UI</h6>
-                        <p class="small text-secondary mt-2">React.js, Redux, jQuery, Tailwind CSS, Bootstrap 5; Responsive & Modular UI</p>
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <h6 class="font-weight-bold"><i class="fas fa-robot mr-2 text-warning"></i> Yapay Zeka & Otomasyon</h6>
-                        <p class="small text-secondary mt-2">API tabanlı AI/LLM entegrasyonları, Çok dilli otomasyon akışları, Prompt Engineering</p>
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <h6 class="font-weight-bold"><i class="fas fa-cloud mr-2 text-secondary"></i> Bulut & DevOps</h6>
-                        <p class="small text-secondary mt-2">Cloudflare CDN & R2, Yüksek Trafik Dağıtımı, Azure DevOps, Docker, CI/CD, GitFlow</p>
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <h6 class="font-weight-bold mt-3"><i class="fas fa-tasks mr-2 text-dark"></i> Mühendislik Pratikleri</h6>
-                        <p class="small text-secondary mt-2">Agile/Scrum,SDLC,Code Reviews,Unit Testing</p>
+                <div class="position-relative" style="z-index: 1;">
+                    <div class="d-flex align-items-center mb-2">
+                        <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #FF4C60, #ff6b7a); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                            <i class="fas fa-code text-white" style="font-size: 20px;"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title font-weight-bold text-white mb-0" style="font-size: 22px;">
+                                Teknik Uzmanlık Yığınım
+                            </h5>
+                            <small class="text-white-50">Full Stack Developer Technology Stack</small>
+                        </div>
                     </div>
                 </div>
+
+                <button type="button" class="close position-absolute" data-dismiss="modal" aria-label="Close" style="right: 20px; top: 20px; width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 10px; opacity: 1; display: flex; align-items: center; justify-content: center; transition: all 0.3s;">
+                    <span aria-hidden="true" class="text-white" style="font-size: 20px; line-height: 1;">&times;</span>
+                </button>
             </div>
-            <div class="modal-footer border-0 bg-light rounded-bottom">
-                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Kapat</button>
+
+            <!-- Modal Body -->
+            <div class="modal-body p-4" style="max-height: 65vh; overflow-y: auto; background: #fafbfc;">
+                <div class="row">
+
+                    <!-- Programlama Dilleri -->
+                    <div class="col-md-6 mb-3">
+                        <div class="skill-category-card h-100" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eee; transition: all 0.3s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #FF4C60, #ff6b7a); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="fas fa-code text-white"></i>
+                                </div>
+                                <h6 class="font-weight-bold mb-0" style="color: #353353;">Programlama Dilleri</h6>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">SQL (T-SQL)</span>
+                                <span class="skill-tag">JavaScript (ES6+)</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">CSS3/Sass</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Backend & Mimari -->
+                    <div class="col-md-6 mb-3">
+                        <div class="skill-category-card h-100" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eee; transition: all 0.3s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #6C6CE5, #8b8be8); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="fas fa-layer-group text-white"></i>
+                                </div>
+                                <h6 class="font-weight-bold mb-0" style="color: #353353;">Backend & Mimari</h6>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-tag">.NET Core</span>
+                                <span class="skill-tag">ASP.NET Core</span>
+                                <span class="skill-tag">MVC</span>
+                                <span class="skill-tag">Web API</span>
+                                <span class="skill-tag">EF Core</span>
+                                <span class="skill-tag">LINQ</span>
+                                <span class="skill-tag">Clean Architecture</span>
+                                <span class="skill-tag">SOLID</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Güvenlik & Kimlik Doğrulama -->
+                    <div class="col-md-6 mb-3">
+                        <div class="skill-category-card h-100" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eee; transition: all 0.3s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #10b981, #34d399); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="fas fa-shield-alt text-white"></i>
+                                </div>
+                                <h6 class="font-weight-bold mb-0" style="color: #353353;">Güvenlik & Auth</h6>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-tag">Authentication</span>
+                                <span class="skill-tag">Authorization</span>
+                                <span class="skill-tag">JWT</span>
+                                <span class="skill-tag">ASP.NET Identity</span>
+                                <span class="skill-tag">OWASP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frontend & UI -->
+                    <div class="col-md-6 mb-3">
+                        <div class="skill-category-card h-100" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eee; transition: all 0.3s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #06b6d4, #22d3ee); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="fas fa-laptop-code text-white"></i>
+                                </div>
+                                <h6 class="font-weight-bold mb-0" style="color: #353353;">Frontend & UI</h6>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-tag">React.js</span>
+                                <span class="skill-tag">Redux</span>
+                                <span class="skill-tag">jQuery</span>
+                                <span class="skill-tag">Tailwind CSS</span>
+                                <span class="skill-tag">Bootstrap 5</span>
+                                <span class="skill-tag">Responsive Design</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yapay Zeka & Otomasyon -->
+                    <div class="col-md-6 mb-3">
+                        <div class="skill-category-card h-100" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eee; transition: all 0.3s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b, #fbbf24); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="fas fa-robot text-white"></i>
+                                </div>
+                                <h6 class="font-weight-bold mb-0" style="color: #353353;">AI & Otomasyon</h6>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-tag">AI/LLM API</span>
+                                <span class="skill-tag">Prompt Engineering</span>
+                                <span class="skill-tag">Otomasyon Akışları</span>
+                                <span class="skill-tag">Çok Dilli Sistemler</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bulut & DevOps -->
+                    <div class="col-md-6 mb-3">
+                        <div class="skill-category-card h-100" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eee; transition: all 0.3s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #8b5cf6, #a78bfa); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="fas fa-cloud text-white"></i>
+                                </div>
+                                <h6 class="font-weight-bold mb-0" style="color: #353353;">Bulut & DevOps</h6>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-tag">Cloudflare CDN</span>
+                                <span class="skill-tag">Cloudflare R2</span>
+                                <span class="skill-tag">Azure DevOps</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">CI/CD</span>
+                                <span class="skill-tag">GitFlow</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Veritabanı -->
+                    <div class="col-md-6 mb-3">
+                        <div class="skill-category-card h-100" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eee; transition: all 0.3s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ec4899, #f472b6); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="fas fa-database text-white"></i>
+                                </div>
+                                <h6 class="font-weight-bold mb-0" style="color: #353353;">Veritabanı</h6>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-tag">SQL Server</span>
+                                <span class="skill-tag">MySQL</span>
+                                <span class="skill-tag">Redis</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mühendislik Pratikleri -->
+                    <div class="col-md-6 mb-3">
+                        <div class="skill-category-card h-100" style="background: white; border-radius: 16px; padding: 20px; border: 1px solid #eee; transition: all 0.3s;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #64748b, #94a3b8); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="fas fa-tasks text-white"></i>
+                                </div>
+                                <h6 class="font-weight-bold mb-0" style="color: #353353;">Mühendislik Pratikleri</h6>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="skill-tag">Agile/Scrum</span>
+                                <span class="skill-tag">SDLC</span>
+                                <span class="skill-tag">Code Reviews</span>
+                                <span class="skill-tag">Unit Testing</span>
+                                <span class="skill-tag">Git</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0 justify-content-between" style="background: white; padding: 20px 30px;">
+                <div class="d-flex align-items-center">
+                    <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite;"></div>
+                    <small class="text-muted">Sürekli öğrenme ve gelişim</small>
+                </div>
+                <button type="button" class="btn px-4 py-2" data-dismiss="modal" style="background: linear-gradient(135deg, #353353, #4a4870); color: white; border-radius: 10px; font-weight: 600; transition: all 0.3s;">
+                    <i class="fas fa-check mr-2"></i>Tamam
+                </button>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .skill-tag {
+        display: inline-block;
+        background: #f1f5f9;
+        color: #475569;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        margin: 3px;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+    }
+
+        .skill-tag:hover {
+            background: #FF4C60;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+    .skill-category-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+        border-color: #FF4C60 !important;
+    }
+
+    #allSkillsModal .close:hover {
+        background: rgba(255,255,255,0.2) !important;
+        transform: rotate(90deg);
+    }
+
+    #allSkillsModal .modal-body::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #allSkillsModal .modal-body::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    #allSkillsModal .modal-body::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+
+        #allSkillsModal .modal-body::-webkit-scrollbar-thumb:hover {
+            background: #FF4C60;
+        }
+
+    .gap-1 {
+        gap: 6px;
+    }
+
+    @@keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    /* Modal Animasyonu */
+    #allSkillsModal.fade .modal-dialog {
+        transform: scale(0.9) translateY(-30px);
+        transition: transform 0.3s ease-out;
+    }
+
+    #allSkillsModal.show .modal-dialog {
+        transform: scale(1) translateY(0);
+    }
+</style>
