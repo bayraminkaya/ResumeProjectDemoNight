@@ -1,15 +1,18 @@
+using Microsoft.EntityFrameworkCore;
 using ResumeProjectDemoNight.Context;
 using ResumeProjectDemoNight.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ResumeContext>();
+// DbContext - appsettings'den connection string oku
+builder.Services.AddDbContext<ResumeContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Session ekle
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromHours(24); // 24 saat session süresi
+    options.IdleTimeout = TimeSpan.FromHours(24);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -32,13 +35,11 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-// Session middleware - UseRouting'den sonra, UseAuthorization'dan önce
+// Session middleware
 app.UseSession();
-
 app.UseAuthorization();
 
 app.MapStaticAssets();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Default}/{action=Index}/{id?}")

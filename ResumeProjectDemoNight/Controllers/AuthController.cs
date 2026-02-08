@@ -38,7 +38,6 @@ namespace ResumeProjectDemoNight.Controllers
             }
 
             var passwordHash = HashPassword(password);
-
             var admin = _context.Admins
                 .FirstOrDefault(x => x.Username == username && x.PasswordHash == passwordHash && x.IsActive);
 
@@ -68,28 +67,11 @@ namespace ResumeProjectDemoNight.Controllers
             return RedirectToAction("Login");
         }
 
-        // GET: Setup - İlk admin oluştur
+        // GET: Setup - CANLIDA KAPATILDI
         public IActionResult Setup()
         {
-            if (_context.Admins.Any())
-            {
-                return RedirectToAction("Login");
-            }
-
-            var admin = new Entities.Admin
-            {
-                Username = "admin",
-                PasswordHash = HashPassword("admin123"),
-                FullName = "Admin User",
-                Email = "admin@example.com",
-                IsActive = true
-            };
-
-            _context.Admins.Add(admin);
-            _context.SaveChanges();
-
-            TempData["Success"] = "Admin hesabı oluşturuldu. Kullanıcı: admin, Şifre: admin123 - Lütfen hemen şifrenizi değiştirin!";
-            return RedirectToAction("Login");
+            // Güvenlik için kapatıldı
+            return NotFound();
         }
 
         // Şifre hashleme - Salt'ı appsettings'den al

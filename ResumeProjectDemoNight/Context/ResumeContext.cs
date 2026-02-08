@@ -5,9 +5,8 @@ namespace ResumeProjectDemoNight.Context
 {
     public class ResumeContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ResumeContext(DbContextOptions<ResumeContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-5V6MJ7S;initial catalog=Project1NightResumeDb;integrated security=true;trust server certificate=true");
         }
 
         public DbSet<About> Abouts { get; set; }
@@ -22,6 +21,5 @@ namespace ResumeProjectDemoNight.Context
         public DbSet<Statistic> Statistics { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
-
     }
 }
