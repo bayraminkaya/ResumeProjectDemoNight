@@ -168,3 +168,31 @@
             top: 0 !important;
         }
 </style>
+<script>
+    $(document).ready(function() {
+
+        // Scroll event
+        $(window).on('scroll', function() {
+            var scrollPos = $(document).scrollTop();
+            var windowHeight = $(window).height();
+            var docHeight = $(document).height();
+
+            // Sayfa sonuna yaklaştıysa
+            if (scrollPos + windowHeight >= docHeight - 300) {
+                setTimeout(function() {
+                    $('.vertical-menu.scrollspy li').removeClass('active');
+                    $('.vertical-menu.scrollspy li:last-child').addClass('active');
+                }, 10);
+            }
+        });
+
+        // Bana Yazın linkine tıklayınca
+        $(document).on('click', 'a[href="#contact"]', function() {
+            setTimeout(function() {
+                $('.vertical-menu.scrollspy li').removeClass('active');
+                $('.vertical-menu.scrollspy li:last-child').addClass('active');
+            }, 600);
+        });
+
+    });
+</script>
