@@ -50,7 +50,7 @@ Stratejik karar alma sürecini destekleyen; **canlı veritabanı istatistikleri*
 <details>
 <summary>📸 Dashboard Ekran Görüntüsü</summary>
 
-![Dashboard](Images/Ekran görüntüsü 2026-02-09 114534.png)
+![Dashboard](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114534.png)
 
 </details>
 
@@ -63,7 +63,7 @@ Modern glassmorphism tasarım, SSL göstergesi ve kurumsal güvenlik hissi veren
 <details>
 <summary>📸 Login Ekran Görüntüsü</summary>
 
-![Login](Images/login.png)
+![Login](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20123701.png)
 
 </details>
 
@@ -78,13 +78,19 @@ Her biri bağımsız CRUD operasyonlarına sahip, Tailwind CSS ile tasarlanmış
 
 | Modül | Ekran Görüntüsü |
 |-------|-----------------|
-| 📋 **Hakkımda Yönetimi** | ![About](Images/admin-about.png) |
-| 💼 **Deneyim Yönetimi** | ![Experience](Images/admin-experience.png) |
-| 🎨 **Portfolio Yönetimi** | ![Portfolio](Images/admin-portfolio.png) |
-| 🏆 **Sertifika Yönetimi** | ![Certificate](Images/admin-certificate.png) |
-| 📧 **Mesaj Kutusu** | ![Messages](Images/admin-messages.png) |
-| ⚙️ **Ayarlar** | ![Settings](Images/admin-settings.png) |
-
+| 📋 **Hakkımda Yönetimi** | ![About](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114549.png) |
+| 💼 **Deneyim Yönetimi** | ![Experience](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114605.png) |
+| 🛠️ **Yetenek Yönetimi** | ![Portfolio](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114631.png) |
+| 🛠️ **Yetenek Yönetimi** | ![Portfolio](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114638.png) |
+| 📜 **Sertifika Yönetimi** | ![Certificate](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114616.png) |
+| 📊 **İstatistik Yönetimi** | ![Certificate](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114648.png) |
+| 🤝 **Hizmet Yönetimi** | ![Certificate](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114659.png) |
+| 🌐 **Sosyal Medya Yönetimi** | ![Certificate](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114705.png) |
+| 🌐 **Sosyal Medya Yönetimi** | ![Certificate](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114716.png) |
+| 💻 **Proje Yönetimi** | ![Certificate](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114729.png) |
+| 💻 **Proje Yönetimi** | ![Certificate](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114806.png) |
+| ⭐ **Referans Yönetimi** | ![Certificate](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114824.png) |
+|
 </details>
 
 ---
@@ -98,12 +104,15 @@ Modern UI/UX prensiplerine uygun, tamamen responsive ve veritabanı destekli din
 
 | Bölüm | Ekran Görüntüsü |
 |-------|-----------------|
-| 🏠 **Hero Section** | ![Hero](Images/hero.png) |
-| 👤 **Hakkımda** | ![About](Images/about.png) |
-| 💼 **Hizmetler** | ![Services](Images/services.png) |
-| 📜 **Deneyimler** | ![Experience](Images/experience.png) |
-| 🎨 **Portfolio** | ![Portfolio](Images/portfolio.png) |
-| 💬 **İletişim** | ![Contact](Images/contact.png) |
+| 🏠 **Hero Section** | ![Hero](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114302.png) |
+| 👤 **Hakkımda** | ![About](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114322.png) |
+| 🚀 **Teknik Uzmanlık Yığını** | ![About](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114332.png) |
+| ⚙️ **Hizmetler** | ![Services](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114343.png) |
+| 💼 **Deneyimler** | ![Experience](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114351.png) |
+| 📜 **Sertifikalarım** | ![Experience](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114412.png) |
+| 🎨 **Portfolio** | ![Portfolio](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114426.png) |
+| 💬 **Referanslarım** | ![Contact](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114445.png) |
+| 📩 **İletişim** | ![Contact](https://raw.githubusercontent.com/bayraminkaya/ResumeProjectDemoNight/refs/heads/master/ResumeProjectDemoNight/Images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202026-02-09%20114451.png) |
 
 </details>
 
