@@ -16,7 +16,12 @@ namespace ResumeProjectDemoNight.Controllers
 
         public IActionResult PortfolioList()
         {
-            var values = _context.Portfolios.Include(x => x.Category).ToList();
+            // Sıralama eklendi
+            var values = _context.Portfolios
+                .Include(x => x.Category)
+                .OrderBy(x => x.DisplayOrder)
+                .ThenByDescending(x => x.PortfolioId)
+                .ToList();
             ViewBag.Categories = _context.Categories.ToList();
             return View(values);
         }
@@ -36,6 +41,7 @@ namespace ResumeProjectDemoNight.Controllers
             portfolio.GithubUrl ??= "";
             portfolio.OtherImages ??= "";
             portfolio.Status = true;
+            // DisplayOrder zaten formdan geliyor, default 0
 
             _context.Portfolios.Add(portfolio);
             _context.SaveChanges();
@@ -75,6 +81,7 @@ namespace ResumeProjectDemoNight.Controllers
             portfolio.TechStack ??= "";
             portfolio.GithubUrl ??= "";
             portfolio.OtherImages ??= "";
+            // DisplayOrder formdan geliyor
 
             _context.Portfolios.Update(portfolio);
             _context.SaveChanges();

@@ -14,8 +14,13 @@ namespace ResumeProjectDemoNight.ViewComponents.DefaultViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var values = _context.Portfolios.ToList();
-            return View(values);
+            var portfolios = _context.Portfolios
+                .Where(x => x.Status == true)
+                .OrderBy(x => x.DisplayOrder)  // Önce DisplayOrder'a göre
+                .ThenByDescending(x => x.PortfolioId)  // Sonra ID'ye göre (yeni önce)
+                .ToList();
+
+            return View(portfolios);
         }
     }
 }

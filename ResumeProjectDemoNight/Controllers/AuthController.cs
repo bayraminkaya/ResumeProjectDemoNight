@@ -72,6 +72,8 @@ namespace ResumeProjectDemoNight.Controllers
         {
             // Güvenlik için kapatıldı
             return NotFound();
+
+            
         }
 
         // Şifre hashleme - Salt'ı appsettings'den al

@@ -14,5 +14,6 @@
         public string TechStack { get; set; }
         public string GithubUrl { get; set; }
         public string OtherImages { get; set; }
+        public int DisplayOrder { get; set; } = 0;
     }
 }

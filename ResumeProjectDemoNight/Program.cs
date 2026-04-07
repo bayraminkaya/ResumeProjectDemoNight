@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ResumeProjectDemoNight.Context;
 using ResumeProjectDemoNight.Filters;
 
@@ -17,13 +17,20 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Controller'lar� ve Admin Filter'� ekle
+// Controller'ları ve Admin Filter'ı ekle
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<AdminAuthFilter>();
 });
 
 var app = builder.Build();
+
+// 🔄 Otomatik Migration - Veritabanını güncelle
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ResumeContext>();
+    context.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

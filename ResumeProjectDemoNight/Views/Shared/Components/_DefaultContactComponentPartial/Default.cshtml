@@ -1,17 +1,12 @@
 ﻿@model ResumeProjectDemoNight.Entities.Message
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
 <section id="contact" style="min-height: 100vh; padding-bottom: 150px;">
-
-
 	<div class="container">
-
 		<!-- section title -->
 		<h2 class="section-title wow fadeInUp">Bana Yazın</h2>
-
 		<div class="spacer" data-height="60"></div>
-
 		<div class="row">
-
 			<div class="col-md-4">
 				<!-- contact info -->
 				<div class="contact-info">
@@ -19,12 +14,18 @@
 					<p class="wow fadeInUp">Formları sevmiyor musunuz? Bana bir <a href="mailto:info@bayraminkaya.com">mail gönder</a>. 👋</p>
 				</div>
 			</div>
-
 			<div class="col-md-8">
 				<!-- Contact Form -->
 				<form class="contact-form mt-6" method="post" action="/Default/SendMessage" id="msgForm">
-
 					<div class="messages"></div>
+
+					<!-- 🍯 Honeypot - Bot Tuzağı (Gizli Alan) -->
+					<div style="position: absolute; left: -9999px;" aria-hidden="true">
+						<input type="text" name="website" tabindex="-1" autocomplete="off">
+					</div>
+
+					<!-- reCAPTCHA Token -->
+					<input type="hidden" name="recaptchaToken" id="recaptchaToken">
 
 					<div class="row">
 						<div class="column col-md-6">
@@ -34,7 +35,6 @@
 								<div class="help-block with-errors"></div>
 							</div>
 						</div>
-
 						<div class="column col-md-6">
 							<!-- Email input -->
 							<div class="form-group">
@@ -42,15 +42,13 @@
 								<div class="help-block with-errors"></div>
 							</div>
 						</div>
-
 						<div class="column col-md-12">
-							<!-- Email input -->
+							<!-- Subject input -->
 							<div class="form-group">
 								<input type="text" class="form-control" asp-for="Subject" placeholder="Konu" required="required">
 								<div class="help-block with-errors"></div>
 							</div>
 						</div>
-
 						<div class="column col-md-12">
 							<!-- Message textarea -->
 							<div class="form-group">
@@ -59,15 +57,29 @@
 							</div>
 						</div>
 					</div>
-
-					<button type="submit" class="btn btn-default">Mesaj Gönder</button>
-
+					<button type="submit" class="btn btn-default" id="submitBtn">Mesaj Gönder</button>
 				</form>
 				<!-- Contact Form end -->
 			</div>
-
 		</div>
-
 	</div>
-
 </section>
+
+<!-- reCAPTCHA v3 Script -->
+<script src="https://www.google.com/recaptcha/api.js?render=@Configuration["ReCaptcha:SiteKey"]"></script>
+<script>
+	document.getElementById('msgForm').addEventListener('submit', function(e) {
+		e.preventDefault();
+
+		var submitBtn = document.getElementById('submitBtn');
+		submitBtn.disabled = true;
+		submitBtn.innerText = 'Gönderiliyor...';
+
+		grecaptcha.ready(function() {
+			grecaptcha.execute('@Configuration["ReCaptcha:SiteKey"]', {action: 'contact'}).then(function(token) {
+				document.getElementById('recaptchaToken').value = token;
+				document.getElementById('msgForm').submit();
+			});
+		});
+	});
+</script>
